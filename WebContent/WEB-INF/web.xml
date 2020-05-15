@@ -9,14 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>RegistrarEstudiante</display-name>
-    <servlet-name>RegistrarEstudiante</servlet-name>
-    <servlet-class>servlets.RegistrarEstudiante</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegistrarEstudiante</servlet-name>
-    <url-pattern>/RegistrarEstudiante</url-pattern>
-  </servlet-mapping>
+<servlet>
+        <servlet-name>prueba</servlet-name>
+        <servlet-class>avecs.servlets.Prueba</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>prueba</servlet-name>
+        <url-pattern>/prueba</url-pattern>
+    </servlet-mapping>
+
+ 
 </web-app>

@@ -34,8 +34,10 @@ public class Conexion<T> {
 		return em;
 	}
 	
+	
 	public <E> T find(E id){
 		T object = (T) em.find(c, id);
+		
 		return object;
 	}
 	
