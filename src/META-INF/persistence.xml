@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="avecs">
+		<class>entidades.Administrador</class>
+		<class>entidades.Asistencia</class>
+		<class>entidades.DocumentoApoyo</class>
+		<class>entidades.Empresa</class>
+		<class>entidades.Estudiante</class>
+		<class>entidades.Genero</class>
+		<class>entidades.Grupo</class>
+		<class>entidades.Materia</class>
+		<class>entidades.Persona</class>
+		<class>entidades.Profesor</class>
+		<class>entidades.Semestre</class>
+		<class>entidades.TipoDocApoyo</class>
+		<class>entidades.TipoId</class>
+		<class>entidades.TipoUsuario</class>
+		<class>entidades.Usuario</class>
+		<class>entidades.Visita</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> <!-- DB Dialect -->
+			 <property name="hibernate.show_sql" value="false" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+			
+		</properties>
+	</persistence-unit>
+</persistence>

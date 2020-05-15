@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+
+    <title>Formulario Postulación Estudiante</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h2>AVECS</h2>
+        </div>
+    </header>
+
+
+    <div class="container">
+
+        <h2 class="text-center">Formulario Postulación Visita empresarial</h2>
+        <form action="">
+
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Tipo de documento</label>
+                <select name="" id="" class="form-control">
+                    <option value="">Seleccionar tipo documento</option>
+                    <option value="">Tarjeta de identidad</option>
+                    <option value="">Cédula de Ciudadanía</option>
+                    <option value="">Cédula de extranjería</option>
+                </select>
+            </div>
+
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Numero de documento</label>
+                <input class="form-control" maxlength="10" type="text" placeholder="" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Nombres</label>
+                <input class="form-control" type="text" placeholder="" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Apellidos</label>
+                <input class="form-control" type="text" placeholder="" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Semestre académico</label>
+                <input class="form-control" type="text" maxlength="2" required placeholder="Numero entre 1 y 12" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>E-mail</label>
+                <input class="form-control" type="email" placeholder="ejemplo@ufps.edu.co" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Telefono</label>
+                <input class="form-control" type="number" placeholder="" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Seguro Médico(eps-arl)</label>
+                <select name="" id="" class="form-control">
+                    <option value="">Seleccionar</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-xs-12" style="text-align: center;">
+                    <a href="#" class="btn btn-danger">Volver</a>
+                    <a href="#VF-DATOSENVIADOS" class="btn btn-danger" data-toggle="modal"> Enviar</a>
+                </div>
+                <div class="modal fade" id="VF-DATOSENVIADOS">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;&nbsp</button>
+                            <h4 style="text-align: center;">Datos enviados</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="form-group"><br><br></div>
+    </div>
+
+    <footer style="visibility: hidden;">
+        <div>
+            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
+            <p>Teléfono (057)(7) 5776655</p>
+            <p>Correo electrónico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+        </div>
+    </footer>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
