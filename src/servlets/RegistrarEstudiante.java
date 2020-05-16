@@ -58,13 +58,29 @@ public class RegistrarEstudiante extends HttpServlet {
 	 Usuario usuario= new Usuario();
 	 UsuarioDao usd= new UsuarioDao();
 	 Integer idP= Integer.parseInt(request.getParameter("id"));
+	 PersonaDao  pd = new PersonaDao();
+	 Persona tempp= pd.find(idP);
+	 int repetidos=	esd.findByCodigoEstudiante(request.getParameter("codigo"));
+	 if(tempp !=null ) {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('esta persona ya ha sido registrada previamente');");
+			 
+			  out.println("</script>");
+	 }else {
+			
+		
+			if(repetidos==1) {out.println("<script type=\"text/javascript\">");
+			out.println("alert(' el codigo estudiantil ha sido registrado en otro usuario');");
+			  out.println("location='index.html';");
+			  out.println("</script>");}
+			
+			else {
 		 TipoId ti= new TipoId();
 		 TipoIdDao tid= new TipoIdDao();
 		 ti=tid.find(Integer.parseInt(request.getParameter("tipoid")));
 		 Genero g = new Genero();
 		 GeneroDao gd= new GeneroDao();
-		 g=gd.find(Integer.parseInt(request.getParameter("genero")));
-		 
+		 g=gd.find(Integer.parseInt(request.getParameter("genero")));	 
 		 p.setId_Persona(idP);
 		
 		 
@@ -83,14 +99,8 @@ public class RegistrarEstudiante extends HttpServlet {
 		 p.setApellido2(request.getParameter("ap2"));
 		 p.setCorreoContacto(request.getParameter("correo"));
 		 
-		 PersonaDao  pd = new PersonaDao();
-		 Persona tempp= pd.find(idP);
-		 
-				if(tempp.equals(null)) {
-					
-					pd.insert(p);
-				
-					
+		
+					pd.insert(p);	
 					usuario.setContrasena(request.getParameter("pass"));
 					 usuario.setCorreoUsuario(request.getParameter("correo"));
 					 usuario.setVerificado((byte) 0);
@@ -103,33 +113,22 @@ public class RegistrarEstudiante extends HttpServlet {
 					 es.setCodigo(request.getParameter("codigo"));
 					 es.setPersona(p);
 					 es.setPersona_id_Persona(idP);
-					usd.insert(usuario);
-					
-					esd.insert(es);
-					
-					
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('La persona ha sido registrada');");
-				  out.println("location='index.html';");
-				  out.println("</script>");
-					
-						 
-				
-			
-	 
-		
-		/*
-		response.getWriter().append(request.getParameter("codigo"));
-	
-		response.getWriter().append();
-		*/
-		
-	}else {
-		
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('id ya registrado');");
-		  out.println("location='index.html';");
-		  out.println("</script>");
-	}
 
+					usd.insert(usuario);
+					esd.insert(es);
+					  out.println("<script type=\"text/javascript\">");
+						out.println("alert('La persona ha sido registrada exitosamente');");
+						  out.println("location='index.html';");
+						  out.println("</script>");
+					  }
+					
+					
+						
+					
+					
+				
+		
+	
+		
+	 }
 }}

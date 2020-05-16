@@ -8,8 +8,10 @@ public class Prueba {
 		g.setIdGenero(9);
 		g.setNombre("prueba");
 		GeneroDao gd = new GeneroDao();
-		gd.insert(g);
-		System.out.print(true);
+		System.out.println(gd.findByCodigoEstudiante("002"));
+		System.out.println(gd.usuarioExists("1",2));
+		
+		
 	}
 
 }
