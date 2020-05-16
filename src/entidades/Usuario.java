@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
 	private TipoUsuario tipoUsuario;
 
 	//bi-directional one-to-one association to Persona
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_usuario")
 	private Persona persona;
 

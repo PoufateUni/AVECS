@@ -31,7 +31,7 @@ public class Profesor implements Serializable {
 	private List<Grupo> grupos;
 
 	//bi-directional one-to-one association to Persona
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="Persona_id_Persona")
 	private Persona persona;
 

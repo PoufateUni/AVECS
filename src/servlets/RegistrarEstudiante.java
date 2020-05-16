@@ -1,14 +1,29 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.persistence.RollbackException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Estudiante;
+import entidades.Genero;
 import entidades.Persona;
+import entidades.TipoId;
+import entidades.TipoUsuario;
+import entidades.Usuario;
+import modelo.EstudianteDao;
+import modelo.GeneroDao;
 import modelo.PersonaDao;
+import modelo.TipoIdDao;
+import modelo.UsuarioDao;
 
 /**
  * Servlet implementation class RegistrarEstudiante
@@ -29,8 +44,7 @@ public class RegistrarEstudiante extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -38,37 +52,84 @@ public class RegistrarEstudiante extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 Persona p= new Persona();
-	 PersonaDao  pd = new PersonaDao();
-	 try {
-		 p.setId_Persona(Integer.parseInt(request.getParameter("id")));
-		 pd.insert(p);
+	 PrintWriter out = response.getWriter();
+	 Estudiante es= new Estudiante();
+	 EstudianteDao esd= new EstudianteDao();
+	 Usuario usuario= new Usuario();
+	 UsuarioDao usd= new UsuarioDao();
+	 Integer idP= Integer.parseInt(request.getParameter("id"));
+		 TipoId ti= new TipoId();
+		 TipoIdDao tid= new TipoIdDao();
+		 ti=tid.find(Integer.parseInt(request.getParameter("tipoid")));
+		 Genero g = new Genero();
+		 GeneroDao gd= new GeneroDao();
+		 g=gd.find(Integer.parseInt(request.getParameter("genero")));
 		 
-	 }catch(NullPointerException e) {
-		 request.getRequestDispatcher("../jsp/errorLogin.jsp");
-		 
-	 }
+		 p.setId_Persona(idP);
 		
-		response.getWriter().append();
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("tipoid"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("genero"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("fecha_nacimiento"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("nombres"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("ap1"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("ap2"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("correo"));
-		response.getWriter().append("/n");
+		 
+		 Date fecha  = new Date();
+		 try {
+				fecha= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha_nacimiento"));
+			} catch (ParseException e1) {
+				
+				e1.printStackTrace();
+			}
+		 p.setFechaNacimiento(fecha);
+		 p.setTipoId(ti);
+		 p.setGenero(g);
+		 p.setNombre(request.getParameter("nombres"));
+		 p.setApellido1(request.getParameter("ap1"));
+		 p.setApellido2(request.getParameter("ap2"));
+		 p.setCorreoContacto(request.getParameter("correo"));
+		 
+		 PersonaDao  pd = new PersonaDao();
+		 Persona tempp= pd.find(idP);
+		 
+				if(tempp.equals(null)) {
+					
+					pd.insert(p);
+				
+					
+					usuario.setContrasena(request.getParameter("pass"));
+					 usuario.setCorreoUsuario(request.getParameter("correo"));
+					 usuario.setVerificado((byte) 0);
+					 usuario.setIdUsuario(idP);
+					 TipoUsuario tiu = new TipoUsuario();
+					 tiu.setIdTipo_usuario(0);
+					 tiu.setNombre("Estudiante");
+					 usuario.setTipoUsuario(tiu);
+					 usuario.setPersona(p);
+					 es.setCodigo(request.getParameter("codigo"));
+					 es.setPersona(p);
+					 es.setPersona_id_Persona(idP);
+					usd.insert(usuario);
+					
+					esd.insert(es);
+					
+					
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('La persona ha sido registrada');");
+				  out.println("location='index.html';");
+				  out.println("</script>");
+					
+						 
+				
+			
+	 
+		
+		/*
 		response.getWriter().append(request.getParameter("codigo"));
-		response.getWriter().append("/n");
-		response.getWriter().append(request.getParameter("pass"));
+	
+		response.getWriter().append();
+		*/
 		
+	}else {
 		
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('id ya registrado');");
+		  out.println("location='index.html';");
+		  out.println("</script>");
 	}
 
-}
+}}
