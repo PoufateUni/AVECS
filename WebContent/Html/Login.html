@@ -24,7 +24,7 @@
         <form action="../IniciarSesion" method="post">
             <div class="form-group container input-group" style="width: 50%">
                 <label>Usuario <span class="glyphicon glyphicon-user"></span> </label>
-                <input class="form-control" type="text" placeholder="número identificación" />
+                <input class="form-control" name="id"type="text" placeholder="número identificación" />
             </div>
 
             <div class="form-group container input-group" style="width: 50%">
@@ -35,10 +35,10 @@
             <div class="form-group container input-group" style="width: 50%">
                 <label>Seleccionar Usuario</label>
                 <select class="form-control" name="tipoUsuario" id="">
-                    <option value="">Estudiante</option>
-                    <option value="">Docente</option>
-                    <option value="">Empresa</option>
-                    <option value="">Administrador</option>
+                    <option value="0" selected>Estudiante</option>
+                    <option value="1">Docente</option>
+                    <option value="2">Empresa</option>
+                    <option value="3">Administrador</option>
                 </select>
             </div>
 
@@ -63,7 +63,8 @@
             <div class="form-group">
 
                 <div class="modal fade" id="VF-OlvidasteContraseña">
-                    <div class="modal-dialog">
+                <form action="../RecuperarContraseña"method="post">
+                  <div class="modal-dialog">
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal"
                                 aria-hidden="true">&times;&nbsp</button>
@@ -72,11 +73,11 @@
 
                             <div class="form-group container input-group" style="width: 50%">
                                 <label>E-mail <span class="glyphicon glyphicon-envelope"></span></label>
-                                <input class="form-control" type="email" placeholder="Correo institucional"/>
+                                <input class="form-control" name="correo"type="email" placeholder="Correo institucional"/>
                                 
                                 <div class="form-group" style="margin: 50px;">
                                     <div class="col-xs-1 col-lg-3"></div>
-                                    <a href="#" class="btn btn-danger col-xs-10 col-lg-6">Enviar</a>
+                                    <button type="submit"class="btn btn-danger col-xs-10 col-lg-6">Enviar</button>
                                     <div class="col-xs-1 col-lg-3"></div>
                                 </div>
                             </div>
@@ -84,6 +85,8 @@
 
                         </div>
                     </div>
+                </form>
+                  
                 </div>
             </div>
 

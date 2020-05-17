@@ -71,7 +71,7 @@ public class RegistrarEstudiante extends HttpServlet {
 		
 			if(repetidos==1) {out.println("<script type=\"text/javascript\">");
 			out.println("alert(' el codigo estudiantil ha sido registrado en otro usuario');");
-			  out.println("location='index.html';");
+			  out.println("location='index.jsp';");
 			  out.println("</script>");}
 			
 			else {
@@ -118,7 +118,7 @@ public class RegistrarEstudiante extends HttpServlet {
 					esd.insert(es);
 					  out.println("<script type=\"text/javascript\">");
 						out.println("alert('La persona ha sido registrada exitosamente');");
-						  out.println("location='index.html';");
+						  out.println("location='index.jsp';");
 						  out.println("</script>");
 					  }
 					

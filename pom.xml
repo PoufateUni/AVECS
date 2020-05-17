@@ -4,6 +4,7 @@
   <artifactId>avecs</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
+ 
   <dependency>
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-core</artifactId>
@@ -31,6 +32,8 @@
         <artifactId>jstl</artifactId>
         <version>1.2</version>
     </dependency>
+
+ 
   </dependencies>
   <packaging>war</packaging>
   <build>

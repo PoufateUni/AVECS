@@ -23,6 +23,7 @@ public class Conexion<T> {
 	
 	public Conexion(Class<T> c) {
 		em = this.getEm();
+	
 		this.c = c;
 	}
 	
@@ -39,13 +40,15 @@ public class Conexion<T> {
 	}
 	
 	
+	
+	
 	public <E> T find(E id){
 		T object = (T) em.find(c, id);
 	
 		return object;
 	}
 	
-	public int usuarioExists(String id, int tipo) {
+	public int usuarioExists(int id, int tipo) {
 		List<Estudiante> resultados=em.createQuery("select usuario.verificado from Usuario usuario where "
 				+ "usuario.idUsuario ="+id+ "AND usuario.tipoUsuario="+tipo).getResultList();
 		
