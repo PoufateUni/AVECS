@@ -32,13 +32,16 @@ public class Visita implements Serializable {
 	@Column(name="fecha_visita_salida")
 	private Date fechaVisitaSalida;
 
-	@Column(name="grupo_id")
-	private String grupoId;
-
 	//bi-directional many-to-one association to Asistencia
 	@OneToMany(mappedBy="visita")
 	private List<Asistencia> asistencias;
 
+	//bi-directional many-to-one association to Municipio
+	@ManyToOne
+	@JoinColumn(name="municipio")
+	private Municipio municipio;
+
+	
 	//bi-directional many-to-one association to DocumentoApoyo
 	@OneToMany(mappedBy="visita")
 	private List<DocumentoApoyo> documentoApoyos;
@@ -96,12 +99,14 @@ public class Visita implements Serializable {
 		this.fechaVisitaSalida = fechaVisitaSalida;
 	}
 
-	public String getGrupoId() {
-		return this.grupoId;
+
+
+	public Municipio getMunicipio() {
+		return municipio;
 	}
 
-	public void setGrupoId(String grupoId) {
-		this.grupoId = grupoId;
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 
 	public List<Asistencia> getAsistencias() {

@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import entidades.Estudiante;
 import entidades.Persona;
+import entidades.Profesor;
 
 
 
@@ -60,6 +61,14 @@ public class Conexion<T> {
 		
 				return resultados.size();
 	}
+	public int findByCodigoProfesor(String codigo) {
+		List<Profesor> resultados=em.createQuery("select pro.codigoProfesor from Profesor pro where "
+				+ "pro.codigoProfesor=" +codigo).getResultList();
+		
+				return resultados.size();
+	}
+	
+	
 	public List<T> list(){
 		TypedQuery<T> consulta= em.createNamedQuery(c.getSimpleName()+".findAll", c);
 		List<T> lista = (List<T>) consulta.getResultList();

@@ -20,8 +20,6 @@ public class Asistencia implements Serializable {
 
 	private byte aprobado;
 
-	@Column(name="Estudiante_Persona_Tipo_id_idTipo_id")
-	private int estudiante_Persona_Tipo_id_idTipo_id;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_registro")
@@ -56,13 +54,6 @@ public class Asistencia implements Serializable {
 		this.aprobado = aprobado;
 	}
 
-	public int getEstudiante_Persona_Tipo_id_idTipo_id() {
-		return this.estudiante_Persona_Tipo_id_idTipo_id;
-	}
-
-	public void setEstudiante_Persona_Tipo_id_idTipo_id(int estudiante_Persona_Tipo_id_idTipo_id) {
-		this.estudiante_Persona_Tipo_id_idTipo_id = estudiante_Persona_Tipo_id_idTipo_id;
-	}
 
 	public Date getFechaRegistro() {
 		return this.fechaRegistro;

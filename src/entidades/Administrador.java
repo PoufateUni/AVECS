@@ -27,8 +27,11 @@ public class Administrador implements Serializable {
 	@Column(name="fecha_salida")
 	private String fechaSalida;
 
+	@Column(name="contrasena")
+	private String contrasena;
+	
 	//bi-directional one-to-one association to Profesor
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="Profesor_Persona_id_Persona")
 	private Profesor profesor;
 
@@ -84,6 +87,14 @@ public class Administrador implements Serializable {
 		visita.setAdministrador(this);
 
 		return visita;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public Visita removeVisita(Visita visita) {

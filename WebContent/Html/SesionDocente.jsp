@@ -1,3 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,24 +28,21 @@
         <form action="">
 
             <div class="form-group container input-group" style="width: 50%">
-                <label>Asignatura</label>
+                <label>Asignatura required</label>
                 <input class="form-control" type="text" placeholder="" />
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Código Asignatura</label>
+                <label>CÃ³digo Asignatura required</label>
                 <input class="form-control" maxlength="7" type="text" placeholder=""/>
             </div>
+         
             <div class="form-group container input-group" style="width: 50%">
-                <label>Docente Responsable</label>
-                <input class="form-control" type="text" placeholder="" />
+                <label>Cantidad de estudiantes que asistirÃ¡n</label>
+                <input class="form-control" type="number" required placeholder="Valor numÃ©rico" required/>
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Cantidad de estudiantes que asistirán</label>
-                <input class="form-control" type="number" required placeholder="Valor numérico" />
-            </div>
-            <div class="form-group container input-group" style="width: 50%">
-                <label>Lugar de la visita</label>
-                <input class="form-control" type="email"/>
+                <label>Dirección de la visita </label>
+                <input class="form-control" type="email" required/>
             </div>
             <div class="form-group container input-group" style="width: 50%">
                 <label>Departamento</label>
@@ -55,23 +56,19 @@
                     <option value="">Seleccionar Municipio</option>
                 </select>
             </div>
-            <div class="form-group container input-group" style="width: 50%">
-                <label>Ciudad</label>
-                <select name="" id="" class="form-control">
-                    <option value="">Seleccionar Ciudad</option>
-                </select>
+            
             </div>
             <div class="form-group container input-group" style="width: 50%">
                 <label>Fecha Inicio</label>
-                <input class="form-control" type="date" />
+                <input class="form-control" type="date" required/>
             </div>
             <div class="form-group container input-group" style="width: 50%">
                 <label>Fecha fin</label>
-                <input class="form-control" type="date"/>
+                <input class="form-control" type="date"required/>
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Duración</label>
-                <input class="form-control" type="number" placeholder="En días" />
+                <label>DuraciÃ³n</label>
+                <input class="form-control" type="number" placeholder="En dÃ­as"required />
             </div>
 
 
@@ -97,9 +94,9 @@
 
     <footer style="visibility: hidden;">
         <div>
-            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
-            <p>Teléfono (057)(7) 5776655</p>
-            <p>Correo electrónico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+            <p>Programa de ComunicaciÃ³n Social - Universidad Francisco de Paula Santander</p>
+            <p>TelÃ©fono (057)(7) 5776655</p>
+            <p>Correo electrÃ³nico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
         </div>
     </footer>
 

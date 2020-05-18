@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Prueba
+ * Servlet implementation class InicioSesion
  */
-@WebServlet("/Prueba")
-public class Prueba extends HttpServlet {
+@WebServlet("/iniciosesion")
+public class InicioSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Prueba() {
+    public InicioSesion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +36,13 @@ public class Prueba extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }

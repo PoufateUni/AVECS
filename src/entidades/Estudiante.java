@@ -29,6 +29,16 @@ public class Estudiante implements Serializable {
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="Persona_id_Persona")
 	private Persona persona;
+	
+	private int Eps;
+	
+	public int getEps() {
+		return Eps;
+	}
+
+	public void setEps(int eps) {
+		Eps = eps;
+	}
 
 	public Estudiante() {
 	}
