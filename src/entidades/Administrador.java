@@ -35,10 +35,7 @@ public class Administrador implements Serializable {
 	@JoinColumn(name="Profesor_Persona_id_Persona")
 	private Profesor profesor;
 
-	//bi-directional many-to-one association to Visita
-	@OneToMany(mappedBy="administrador")
-	private List<Visita> visitas;
-
+	
 	public Administrador() {
 	}
 
@@ -74,20 +71,6 @@ public class Administrador implements Serializable {
 		this.profesor = profesor;
 	}
 
-	public List<Visita> getVisitas() {
-		return this.visitas;
-	}
-
-	public void setVisitas(List<Visita> visitas) {
-		this.visitas = visitas;
-	}
-
-	public Visita addVisita(Visita visita) {
-		getVisitas().add(visita);
-		visita.setAdministrador(this);
-
-		return visita;
-	}
 
 	public String getContrasena() {
 		return contrasena;
@@ -97,11 +80,6 @@ public class Administrador implements Serializable {
 		this.contrasena = contrasena;
 	}
 
-	public Visita removeVisita(Visita visita) {
-		getVisitas().remove(visita);
-		visita.setAdministrador(null);
-
-		return visita;
-	}
+	
 
 }

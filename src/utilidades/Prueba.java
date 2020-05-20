@@ -8,11 +8,9 @@ public class Prueba {
 		g.setIdGenero(9);
 		g.setNombre("prueba");
 		GeneroDao gd = new GeneroDao();
-		System.out.println(gd.findByCodigoEstudiante("002"));
-		System.out.println(gd.usuarioExists(1,2));
 		
-		Email email = new Email();
-		email.enviarCorreo("anotheragofe@gmail.com","Locos$7983", "poutecermi", "prueba", "prueba");
+		System.out.println(gd.getEm().createQuery("from Grupo grupo where  grupo.profesor =667").getResultList().size());
+		
 		
 	}
 

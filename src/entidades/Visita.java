@@ -22,7 +22,7 @@ public class Visita implements Serializable {
 	@Column(name="cupos_disponibles")
 	private String cuposDisponibles;
 
-	private String duracion;
+	
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_visita_inicio")
@@ -40,16 +40,15 @@ public class Visita implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="municipio")
 	private Municipio municipio;
+	@ManyToOne
+	@JoinColumn(name="empresa_rut")
+	private Empresa empresa;
 
 	
 	//bi-directional many-to-one association to DocumentoApoyo
 	@OneToMany(mappedBy="visita")
 	private List<DocumentoApoyo> documentoApoyos;
 
-	//bi-directional many-to-one association to Administrador
-	@ManyToOne
-	@JoinColumn(name="Administrador_Profesor_Persona_id_Persona")
-	private Administrador administrador;
 
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
@@ -61,6 +60,14 @@ public class Visita implements Serializable {
 
 	public int getIdVisita() {
 		return this.idVisita;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public void setIdVisita(int idVisita) {
@@ -75,13 +82,7 @@ public class Visita implements Serializable {
 		this.cuposDisponibles = cuposDisponibles;
 	}
 
-	public String getDuracion() {
-		return this.duracion;
-	}
-
-	public void setDuracion(String duracion) {
-		this.duracion = duracion;
-	}
+	
 
 	public Date getFechaVisitaInicio() {
 		return this.fechaVisitaInicio;
@@ -153,13 +154,6 @@ public class Visita implements Serializable {
 		return documentoApoyo;
 	}
 
-	public Administrador getAdministrador() {
-		return this.administrador;
-	}
-
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
-	}
 
 	public Grupo getGrupo() {
 		return this.grupo;

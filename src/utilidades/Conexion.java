@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import entidades.Estudiante;
+import entidades.Grupo;
 import entidades.Persona;
 import entidades.Profesor;
 
@@ -55,6 +56,8 @@ public class Conexion<T> {
 		
 		return resultados.size();
 	}
+	
+	
 	public int findByCodigoEstudiante(String codigo) {
 		List<Estudiante> resultados=em.createQuery("select estudiante.codigo from Estudiante estudiante where "
 				+ "estudiante.codigo=" +codigo).getResultList();

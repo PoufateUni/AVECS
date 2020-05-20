@@ -19,7 +19,6 @@ public class Municipio implements Serializable {
 	@Column(name="id_municipio")
 	private int idMunicipio;
 
-	private int estado;
 
 	private String municipio;
 
@@ -38,14 +37,6 @@ public class Municipio implements Serializable {
 
 	public void setIdMunicipio(int idMunicipio) {
 		this.idMunicipio = idMunicipio;
-	}
-
-	public int getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(int estado) {
-		this.estado = estado;
 	}
 
 	public String getMunicipio() {

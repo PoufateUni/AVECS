@@ -16,7 +16,7 @@
 <body>
  
     
-    <header>
+    <header style="background: #dd4b39">
         <div class="container">
             <h2>AVECS</h2>
         </div>
@@ -40,27 +40,28 @@
     	%>
     	<nav style=" text-align: right;">
         <ul class="menu row">
-            <div class="col-xs-4 col-sm-6 col-md-8 col-lg-8"></div>
-    	     <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href=""><%=session.getAttribute("nombre") %></a></li>
+            <div class="col-xs-4 col-sm-6 col-md-8 col-lg-6"></div>
+    	     <li class="col-xs-4 col-sm-3 col-md-2 col-lg-3"><a href=""><%=session.getAttribute("nombre") %></a></li>
     	<% 
     	int tipo= (Integer)session.getAttribute("tipo_usu");
          if(tipo==0||tipo==2){
     
     %>
     
-    
-    <%	
+    <%=tipo %>
+    <%		
     }else if(session.getAttribute("tipo_usu").equals(1)){
     	%>
-    	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="Html/SesionDocente.jsp">Crear Visita</a></li>
+    	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="Html/SesionDocente.jsp">Administrar Perfil</a></li>
+    	  <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="RegistrarVisita">Crear Visita</a></li>
     	<%
     }else{
     	%>
-   	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="Html/RegistroVisitas.jsp">Administrar</a></li>
+   	
    	<%
     }
          %>
-             <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><form method="get" action="/avecs/IniciarSesion"><button type="submit">salir</button></form></li>
+             <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><form method="get" action="/avecs/IniciarSesion"><button type="submit">salir</button></form></li>
         </ul>
     </nav>
     </div><% 
@@ -69,12 +70,14 @@
          
 
 
+
+
 	
     <footer>
         <div>
-            <p>Programa de ComunicaciÃ³n Social - Universidad Francisco de Paula Santander</p>
-            <p>TelÃ©fono (057)(7) 5776655</p>
-            <p>Correo electrÃ³nico:  oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
+            <p>Teléfono (057)(7) 5776655</p>
+            <p>Correo electrónico:  oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
         </div>
     </footer>
 

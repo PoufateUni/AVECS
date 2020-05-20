@@ -102,7 +102,7 @@ public class IniciarSesion extends HttpServlet {
 				sesion.setAttribute("nombre", nombre);
 				sesion.setAttribute("tipo_usu",tipoUsuario);
 				sesion.setAttribute("verificado",verificado);
-				
+				sesion.setMaxInactiveInterval(10*60);
 				
 				
 			out.println("<script type=\"text/javascript\">");
