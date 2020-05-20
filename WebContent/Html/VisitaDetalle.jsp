@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@page import="java.util.List"%>
-    <%@page import="entidades.Grupo"%>
-    <%@page import="entidades.Empresa"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <title>Registrar Visita</title>
+    <title>Detalles de Visita</title>
 </head>
 
 
@@ -25,92 +23,78 @@
         </div>
     </header>
 
-<%
-List<Grupo> listaGrupos = (List)request.getAttribute("listaGrupos");
-List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
-%>
 
     <div class="container">
 
-        <h2 class="text-center">Registrar Visita</h2>
+        <h2 class="text-center">Visita Detallada</h2>
         <form action="RegistrarVisita" method="post">
-			<div class="form-group container input-group" style="width: 50%">
-                <label>Titulo de visita</label>
-                <input class="form-control" required name="titulo" type="date" />
+			
+			 <div class="form-group container input-group" style="width: 50%">
+                <label>Titulo=</label>
+                 <p><c:out value="${requestScope.titulo}"/></p>
+        	
             </div>
-            <div class="form-group container input-group" style="width: 50%">
-                <label>Descripcion</label>
-                <input class="form-control" required name="descripcion" type="date" />
+			
+			 <div class="form-group container input-group" style="width: 50%">
+                <label>Descripcion=</label>
+                 <p><c:out value="${requestScope.descripcion}"/></p>
+        
             </div>
+			
             <div class="form-group container input-group" style="width: 50%">
-                <label>Grupo</label>
-                 <select name="grupo" id="grupo_id" required> 
-					
-					
-					<%
-					for(int i=0;i<listaGrupos.size();i++){
-						%>
-						<option value="<%=listaGrupos.get(i).getIdGrupo() %>"><%=listaGrupos.get(i).getMateria().getNombre() %>- <%=listaGrupos.get(i).getIdGrupo() %></option>
-						
-					<%	
-					}
-					
-					%>
-
-				   </select> 
+                <label>Grupo=</label>
+                 <p><c:out value="${requestScope.grupo}"/></p>
         
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Empresa a la que visitará</label>
-                 <select name="empresa" id="listaEmpresa"required> 
-				
-					
-					<%
-					for(int i=0;i<listaEmpresa.size();i++){
-						%>
-						<option value="<%=listaEmpresa.get(i).getRut()%>"><%=listaEmpresa.get(i).getNombreRazonSocial() %></option>
-						
-					<%	
-					}
-					
-					%>
-
-				   </select> 
+                <label>Nombre de la materia=</label>
+               <p><c:out value="${requestScope.materia}"></c:out></p>
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Docente</label>
+              <p><c:out value="${requestScope.docente}"></c:out> codigo:<c:out value="${requestScope.docenteId}"></c:out></p>
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Empresa que se visitará= <a href="DetallarEmpresa?<c:out value="${requestScope.empresaId}"></c:out>"><c:out value="${requestScope.empresa}"></c:out></a></label>
+                <br>
+                <p> direccion: <c:out value="${requestScope.empresaDireccion}"></c:out> </p>
+                
 				   </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Departamento</label>
-                <select name="departamento" id="" class="form-control">
-                    <option value="">Seleccionar Departamento</option>
-                </select>
+                <label>Departamento= </label>
+               <p><c:out value="${requestScope.departamento}"></c:out></p>
             </div>
+            
             <div class="form-group container input-group" style="width: 50%">
-                <label>Municipio</label>
-                <select name="municipio" id="" class="form-control">
-                    <option value="66">Seleccionar Municipio</option>
-                </select>
+             <label>Municipio= </label>
+               <p><c:out value="${requestScope.municipio}"></c:out></p>
+          
             </div>
+           
             <div class="form-group container input-group" style="width: 50%">
-                
-            </div>
+             <label>Fecha Inicio=</label>
+               <p><c:out value="${requestScope.fechaIn}"></c:out></p>
+             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Fecha Inicio</label>
-                <input class="form-control" name="fechaInicio" type="date" />
-            </div>
+                <label>Fecha fin= </label>
+                <p><c:out value="${requestScope.fechaFinal}"></c:out></p>
+                </div>
+           
             <div class="form-group container input-group" style="width: 50%">
-                <label>Fecha fin</label>
-                <input class="form-control" name="fechaFin"type="date"/>
-            </div>
+                <label>Duración(días)= </label>
+                <p><c:out value="${requestScope.duracion}"></c:out></p>
+                </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Cupo Maximo</label>
-                <input class="form-control" name="cupos" type="number" required placeholder="numero de cupos maximos" />
-            </div>
+                <label>Cupos Disponibles=</label>
+                <p><c:out value="${requestScope.cupos}"></c:out></p>
+                </div>
            
 
 
             <div class="form-group">
                 <div class="col-xs-12" style="text-align: center;">
-                    <a href="#" class="btn btn-danger" onclick="history.back()">Volver</a>
-                    <button type="submit">Enviar</button>
+                    <a href="/index.html" class="btn btn-danger" >Volver</a>
+                   
                 </div>
                 <!--     <div class="modal fade" id="VF-DATOSENVIADOS">
                     <div class="modal-dialog">

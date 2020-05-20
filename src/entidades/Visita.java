@@ -32,6 +32,12 @@ public class Visita implements Serializable {
 	@Column(name="fecha_visita_salida")
 	private Date fechaVisitaSalida;
 
+	@Column(name="titulo")
+	private String titulo;
+	
+	@Column(name="descripcion")
+	private String descripcion;
+	
 	//bi-directional many-to-one association to Asistencia
 	@OneToMany(mappedBy="visita")
 	private List<Asistencia> asistencias;
@@ -43,7 +49,10 @@ public class Visita implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="empresa_rut")
 	private Empresa empresa;
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="fecha_insercion")
+	private Date fechaInsercion;
 	
 	//bi-directional many-to-one association to DocumentoApoyo
 	@OneToMany(mappedBy="visita")
@@ -58,9 +67,35 @@ public class Visita implements Serializable {
 	public Visita() {
 	}
 
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Date getFechaInsercion() {
+		return fechaInsercion;
+	}
+
+	public void setFechaInsercion(Date fechaInsercion) {
+		this.fechaInsercion = fechaInsercion;
+	}
+
 	public int getIdVisita() {
 		return this.idVisita;
 	}
+
+	
 
 	public Empresa getEmpresa() {
 		return empresa;

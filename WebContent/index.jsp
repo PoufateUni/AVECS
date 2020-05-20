@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+ <%@page import="entidades.Visita"%>
+ <%@page import="modelo.VisitaDao" %>
+ <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +17,10 @@
 
 <body>
  
-    
+    <%
+    VisitaDao vd = new VisitaDao();
+    List <Visita> visitas= vd.getEm().createQuery("from Visita order by fechaInsercion  DESC ").setMaxResults(10).getResultList();
+    %>
     <header style="background: #dd4b39">
         <div class="container">
             <h2>AVECS</h2>
@@ -68,18 +73,58 @@
     }
     %>
          
+	<div class="container-fluid">
+<div class="catalogo" >
+	<%
+	for(int i=0;i<visitas.size();i++){
+		%>
+	<div class="visita_individual">
+	<div>
+	<p>Empresa =
+	  <%= visitas.get(i).getEmpresa().getNombreRazonSocial() %>
+	</p>
+	<p>Fecha de inicio=
+	  <%= visitas.get(i).getFechaVisitaInicio() %>
+	</p>
+	
+	<div>
+	<p>codigo grupo=
+	  <%= visitas.get(i).getGrupo().getIdGrupo() %>
+	</p>
+	<p>Asignatura=
+	  <%= visitas.get(i).getGrupo().getMateria().getNombre() %>
+	</p>
+	<p>cupos disponibles=
+	  <%= visitas.get(i).getCuposDisponibles() %>
+	</p>
+	<a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a>
+	
+	</div>
+	
+	</div>
+	<br></br>
+	</div>
+	<%
+		}%>
+		</div>
+		
+		
+		  
+		
+		
+	
+	
+	
+	
 
+	
+	
+	</div>
 
 
 
 	
-    <footer>
-        <div>
-            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
-            <p>Teléfono (057)(7) 5776655</p>
-            <p>Correo electrónico:  oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
-        </div>
-    </footer>
+  
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

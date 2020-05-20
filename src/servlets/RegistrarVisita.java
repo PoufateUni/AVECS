@@ -46,13 +46,15 @@ public class RegistrarVisita extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("in");
 		HttpSession sesion = request.getSession();
-		boolean usuarioIn=sesion.getAttribute("usuario")==null;
+		
+		boolean usuarioOut=sesion.getAttribute("usuario")!=null;
+		System.out.println(usuarioOut);
 		//arreglar estos condicionales
 		boolean tipoIn=false;
-		if(sesion.getAttribute("tipo_usu"!=null);
-		tipoIn =!sesion.getAttribute("tipo_usu").equals(1);
-		if(usuarioIn||tipoIn)  {
-			int usuario=(int) sesion.getAttribute("usuario");
+		if(sesion.getAttribute("tipo_usu")!=null) {
+		tipoIn=sesion.getAttribute("tipo_usu").equals(1);}
+		if(usuarioOut&&tipoIn)  {
+		int usuario=(int) sesion.getAttribute("usuario");
 		Grupo grupo = new Grupo();
 		MateriaDao materiaDao = new MateriaDao();
 		System.out.println(usuario);
@@ -65,12 +67,15 @@ public class RegistrarVisita extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Html/RegistroVisita.jsp");
 		
 		rd.forward(request, response);
-		response.getWriter().append("Served at: "+materias.size()).append(request.getContextPath());
+		
 		}else {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+	
 			PrintWriter out= response.getWriter();
-			out.println("<font color=red>Acceso Invalido, inicie con su usuario Docente</font>");
-			rd.forward(request, response);
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Error en las credenciales de usuario, asegurese que ha ingresado como docente');");
+			 out.println("location='index.jsp';");
+			  out.println("</script>");
+			
 	}
 	}
 
@@ -91,37 +96,58 @@ public class RegistrarVisita extends HttpServlet {
 		int empresa =Integer.parseInt(request.getParameter("empresa"));
 		int municipio=Integer.parseInt(request.getParameter("municipio"));
 		municipio=7;
-		Date fecha  = new Date();
+		Date fechaIn  = new Date();
+		Date fechaFin  = new Date();
+		
 		 try {
-				fecha= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicio"));
+				fechaIn= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicio"));
 			} catch (ParseException e1) {
 				
 				e1.printStackTrace();
 			}
-		 visita.setFechaVisitaInicio(fecha);
+		 visita.setFechaVisitaInicio(fechaIn);
 		 try {
-				fecha= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFin"));
+			 fechaFin= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFin"));
 			} catch (ParseException e1) {
 				
 				e1.printStackTrace();
 			}
+		
 		 
-		 visita.setFechaVisitaSalida(fecha);
+		 if(fechaFin.before(fechaIn)) {
+				PrintWriter out= response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('ha insertado una fecha de finalización antes de la fecha de incio, rectifique');");
+				 out.println("location='index.jsp';"); 
+				out.println("</script>");
+				  this.destroy();
+			
+		 }
+		 
+		 visita.setFechaVisitaSalida(fechaFin);
 		 visita.setGrupo(grupoDao.find(grupo));
 		 visita.setEmpresa(empresaDao.find(empresa));
-		 
+		 visita.setTitulo((request.getParameter("titulo")));
+		 visita.setDescripcion((request.getParameter("descripcion")));
 		 visita.setMunicipio(md.find(municipio));
 		 visita.setCuposDisponibles(request.getParameter("cupos"));
 		 visitaDao.insert(visita);
 		 
+			PrintWriter out= response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Registro Exitoso');");
+			 out.println("location='index.jsp';");
+			  out.println("</script>");
 		 
 		 
 		}else
 		{
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
 			PrintWriter out= response.getWriter();
-			out.println("<font color=green>Registro Exitoso</font>");
-			rd.include(request, response);
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('error en los credenciales de usuario');");
+			 out.println("location='index.jsp';");
+			  out.println("</script>");
 		}
 	}
 
