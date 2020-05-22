@@ -60,6 +60,9 @@ public class IniciarSesion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("contraseña= " +request.getParameter("pass"));
+		System.out.println("usuario= " +request.getParameter("id"));
+		
 		PrintWriter out = response.getWriter();
 				HttpSession sesion = request.getSession();
 				
@@ -92,6 +95,8 @@ public class IniciarSesion extends HttpServlet {
 			  out.println("</script>");
 		}else {
 			usu=usud.find(id);
+			System.out.println(id);
+			
 			if(pass.equals(usu.getContrasena())) {
 				int identificador=usu.getIdUsuario();
 				int tipoUsuario1=usu.getTipoUsuario().getIdTipo_usuario();

@@ -1,4 +1,8 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@page import="entidades.Eps"%>
+ <%@page import="modelo.EpsDao" %>
+ <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,11 @@
     <title>Registro</title>
 </head>
 
+
 <body>
+
+<%   EpsDao epsDao = new EpsDao();
+    %>
     <header>
         <div class="container">
             <h2>AVECS</h2>
@@ -23,15 +31,15 @@
         <h2 class="text-center">Registrarse</h2>
         <form method="post" action="../registrarestudiante">
             <div class="form-group"><br></div>
-            <!-- -información personal -->
+            <!-- -informaciÃ³n personal -->
             <div class="form-group container input-group" style="width: 50%">
-                <label>Número de identificación <span class="glyphicon glyphicon-asterisk"></span></label>
+                <label>NÃºmero de identificaciÃ³n <span class="glyphicon glyphicon-asterisk"></span></label>
 
                 <input class="form-control" name="id"type="number" maxlength="10" placeholder="#"required>
                   <select name="tipoid" id="id"> 
                 
 					
-					<option value="1" selected>Cedula de Ciudadanía
+					<option value="1" selected>Cedula de Ciudadaní­a
 					<option value="2">Tarjeta De Identidad
 					<option value="3">Cedula de Extranjeria
 					<option value="4">Pasaporte
@@ -39,7 +47,7 @@
             </div>
             
             <div class="form-group container input-group" style="width: 50%">
-                <label>Género<span class="glyphicon glyphicon-user"></span></label>
+                <label>GÃ©nero<span class="glyphicon glyphicon-user"></span></label>
 
                  <select name="genero" id="genero"> 
                 
@@ -99,11 +107,11 @@
                     <option value="3">Cafesalud E.P.S. S.A.
 
 </option>
-                    <option value="5">E.P.S.  Sanitas S.A.
+                    <option value="5">E.P.S.Â  Sanitas S.A.
 </option>
-                      <option value="7">E.P.S. Unimec - Liquidación
+                      <option value="7">E.P.S. Unimec - LiquidaciÃ³n
 </option>
-                        <option value="8">Compensar  E.P.S.
+                        <option value="8">CompensarÂ  E.P.S.
 </option>
                           <option value="9">EPS Prog. Comfenalco Antioquia
 </option>
@@ -113,15 +121,15 @@
 </option>
                                 <option value="12">Colseguros E.P.S.
 </option>
-                                  <option value="13">E.P.S.  Saludcoop
+                                  <option value="13">E.P.S.Â  Saludcoop
 </option>
-                                    <option value="14">E.P.S.  Saludcoop
+                                    <option value="14">E.P.S.Â  Saludcoop
 </option>
                                       <option value="15">EPS Servicios Medicos Colpatria
 </option>
                                         <option value="16">Coomeva E.P.S.
 </option>
-                             <option value="17">E.P.S. Famisanar LTDA.  CAFAM-COLSUBSIDIO
+                             <option value="17">E.P.S. Famisanar LTDA.Â  CAFAM-COLSUBSIDIO
 
 </option>
                              <option value="18">E.P.S Servicio Occidental de Salud S.A.-EPS-S.O.S.
@@ -154,14 +162,14 @@
 			
 
             <div class="form-group container input-group" style="width: 50%">
-                <label>Código<span class="glyphicon glyphicon-education" ></span></label>
+                <label>CÃ³digo<span class="glyphicon glyphicon-education" ></span></label>
 		
                 <input class="form-control" type="number" name="codigo" maxlength="7" placeholder="Codigo"required>
             </div>
 
             <div class="form-group container input-group" style="width: 50%">
-                <label>Contraseña <span class="glyphicon glyphicon-lock"></span> </label>
-                <input class="form-control" name="pass" type="password" placeholder="Contraseña" required/>
+                <label>ContraseÃ±a <span class="glyphicon glyphicon-lock"></span> </label>
+                <input class="form-control" name="pass" type="password" placeholder="ContraseÃ±a" required/>
             </div>
             <div class="form-group">
                 <div class="container-fluid" style="text-align: center;">

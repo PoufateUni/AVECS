@@ -36,7 +36,7 @@
         <ul class="menu row">
             <div class="col-xs-4 col-sm-6 col-md-8 col-lg-8"></div>
             <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="Html/Login.html">Iniciar Sesión</a></li>
-            <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="Html/Registrarse.html">Registrarse</a></li>
+            <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="Html/Registrarse.jsp">Registrarse</a></li>
             
         </ul>
     </nav>

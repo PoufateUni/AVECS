@@ -30,14 +30,22 @@ public class Estudiante implements Serializable {
 	@JoinColumn(name="Persona_id_Persona")
 	private Persona persona;
 	
-	private int Eps;
 	
-	public int getEps() {
-		return Eps;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="eps")
+	private Eps eps;
+	
+	
+
+	
+	public Eps getEps() {
+		return eps;
 	}
 
-	public void setEps(int eps) {
-		Eps = eps;
+	public void setEps(Eps eps) {
+		eps = eps;
 	}
 
 	public Estudiante() {
@@ -87,6 +95,12 @@ public class Estudiante implements Serializable {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	@Override
+	public String toString() {
+		return "Estudiante [persona_id_Persona=" + persona_id_Persona + ", codigo=" + codigo + ", asistencias="
+				+ asistencias + ", persona=" + persona + ", eps=" + eps + "]";
 	}
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-05-2020 a las 04:09:01
+-- Tiempo de generación: 20-05-2020 a las 22:14:00
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -35,6 +35,13 @@ CREATE TABLE `administrador` (
   `Profesor_Persona_id_Persona` int(11) NOT NULL,
   `contrasena` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`fecha_entrada`, `fecha_salida`, `Profesor_Persona_id_Persona`, `contrasena`) VALUES
+('2020-05-12', '2020-05-21', 664, '87');
 
 -- --------------------------------------------------------
 
@@ -134,7 +141,8 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`rut`, `nombre_razon_social`, `telefono`, `direccion`, `representante_legal`) VALUES
-(1111, 'modelaje del oriente', '1234', 'asdasd', 5);
+(1111, 'modelaje del oriente', '1234', 'asdasd', 5),
+(87012311, 'Medios Digitales SA', '1234', 'av 7 este', 9);
 
 -- --------------------------------------------------------
 
@@ -171,7 +179,8 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`Persona_id_Persona`, `codigo`, `EPS`) VALUES
-(1, '1151624', '0');
+(1, '1151624', '0'),
+(10909344, '999', '0');
 
 -- --------------------------------------------------------
 
@@ -212,7 +221,8 @@ CREATE TABLE `grupo` (
 INSERT INTO `grupo` (`idGrupo`, `Materia_idMateria`, `Profesor_Persona_id_Persona`) VALUES
 (1, 123, 667),
 (2, 1234, 667),
-(778, 118, 664);
+(778, 118, 664),
+(13307031, 1330703, 664);
 
 -- --------------------------------------------------------
 
@@ -233,7 +243,8 @@ CREATE TABLE `materia` (
 INSERT INTO `materia` (`idMateria`, `nombre`, `Semestre_idSemestre`) VALUES
 (118, 'Sociedad Y Cultura', 5),
 (123, 'fotografia', 1),
-(1234, 'fotografia 2', 6);
+(1234, 'fotografia 2', 6),
+(1330703, 'ESTRATEGIA DE MEDIOS', 6);
 
 -- --------------------------------------------------------
 
@@ -1377,9 +1388,11 @@ CREATE TABLE `persona` (
 INSERT INTO `persona` (`id_Persona`, `Genero_idGenero`, `Tipo_id_idTipo_id`, `nombre`, `apellido1`, `apellido2`, `correo_contacto`, `fecha_nacimiento`) VALUES
 (1, 1, 1, 'jhonatan', 'a', 'b', 'claudia@ufps.edu.co', '2020-05-13'),
 (5, 3, 1, 'representante', 'a', 'a', 'a', '2020-05-04'),
+(9, 1, 1, 'Arturito', 'Garrafla', 'gandia', 'correo@ufps.edu.co', '2020-05-13'),
 (664, 1, 1, 'Profesor1', 'profesorape', 'profesorape', 'eduardojosepc@ufps.edu.co', '2020-05-13'),
 (666, 2, 1, 'Carmen', 'Janeth', 'Parada', 'correo', '2020-05-17'),
-(667, 3, 1, 'Milton', 'prueba', 'prueba', 'motilon@ufps.edu.co', '2020-05-19');
+(667, 3, 1, 'Milton', 'prueba', 'prueba', 'motilon@ufps.edu.co', '2020-05-19'),
+(10909344, 1, 1, 'Arturito junior', 'gargafa', 'gandia', 'arturito@ufps.edu.co', '2020-04-15');
 
 -- --------------------------------------------------------
 
@@ -1422,7 +1435,8 @@ INSERT INTO `semestre` (`idSemestre`, `periodo`, `anio`) VALUES
 (3, 'I', '2021'),
 (4, 'II', '2021'),
 (5, 'I', '2022'),
-(6, 'II', '2022');
+(6, 'II', '2022'),
+(7, '1', '2020');
 
 -- --------------------------------------------------------
 
@@ -1511,7 +1525,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`Tipo_usuario_idTipo_usuario`, `correo_usuario`, `contrasena`, `verificado`, `id_usuario`) VALUES
 (0, 'claudia@ufps.edu.co', '87', 0, 1),
 (1, 'eduardojosepc@ufps.edu.co', '09', 0, 664),
-(1, 'motilon@ufps.edu.co', '87', 0, 667);
+(1, 'motilon@ufps.edu.co', '87', 0, 667),
+(0, 'arturito@ufps.edu.co', '87', 0, 10909344);
 
 -- --------------------------------------------------------
 
@@ -1526,16 +1541,25 @@ CREATE TABLE `visita` (
   `fecha_visita_salida` date DEFAULT NULL,
   `cupos_disponibles` varchar(45) DEFAULT NULL,
   `municipio` int(6) UNSIGNED NOT NULL,
-  `empresa_rut` int(11) NOT NULL
+  `empresa_rut` int(11) NOT NULL,
+  `fecha_insercion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `titulo` text NOT NULL,
+  `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `visita`
 --
 
-INSERT INTO `visita` (`idVisita`, `fecha_visita_inicio`, `Grupo_idGrupo`, `fecha_visita_salida`, `cupos_disponibles`, `municipio`, `empresa_rut`) VALUES
-(1, '2020-05-04', 1, '2020-05-27', '8', 7, 1111),
-(2, '2020-05-05', 2, '2020-05-29', '11', 7, 1111);
+INSERT INTO `visita` (`idVisita`, `fecha_visita_inicio`, `Grupo_idGrupo`, `fecha_visita_salida`, `cupos_disponibles`, `municipio`, `empresa_rut`, `fecha_insercion`, `titulo`, `descripcion`) VALUES
+(1, '2020-05-04', 1, '2020-05-27', '8', 7, 1111, '2020-05-20 14:39:54', '', ''),
+(2, '2020-05-05', 2, '2020-05-29', '11', 7, 1111, '2020-05-20 14:39:54', '', ''),
+(3, '2020-05-05', 1, '2020-05-29', '79', 7, 1111, '2020-05-20 14:39:54', '', ''),
+(4, '2020-05-05', 778, '2020-06-04', '100', 7, 87012311, '2020-05-20 14:39:54', '', ''),
+(5, '2020-05-20', 13307031, '2020-05-06', '98', 7, 1111, '2020-05-20 14:39:54', '', ''),
+(6, '2020-05-05', 778, '2020-05-29', '1854241', 7, 87012311, '2020-05-20 14:43:42', '', ''),
+(8, '2020-05-12', 778, '2020-05-21', '77', 7, 1111, '2020-05-20 14:56:41', '', ''),
+(9, '2020-05-20', 778, '2020-05-28', '1234', 7, 1111, '2020-05-20 15:22:32', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -1712,7 +1736,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT de la tabla `semestre`
 --
 ALTER TABLE `semestre`
-  MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_id`
@@ -1724,7 +1748,7 @@ ALTER TABLE `tipo_id`
 -- AUTO_INCREMENT de la tabla `visita`
 --
 ALTER TABLE `visita`
-  MODIFY `idVisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idVisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
