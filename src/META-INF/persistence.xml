@@ -26,7 +26,7 @@
 			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> <!-- DB Dialect -->
-			 <property name="hibernate.show_sql" value="false" /> <!-- Show SQL in console -->
+			 <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
             <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
 			
 		</properties>

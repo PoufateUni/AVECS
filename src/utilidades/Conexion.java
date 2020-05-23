@@ -51,7 +51,7 @@ public class Conexion<T> {
 	}
 	
 	public int usuarioExists(int id, int tipo) {
-		List<Estudiante> resultados=em.createQuery("select usuario.verificado from Usuario usuario where "
+		List<Estudiante> resultados=em.createQuery("from Usuario usuario where "
 				+ "usuario.idUsuario ="+id+ "AND usuario.tipoUsuario="+tipo).getResultList();
 		
 		return resultados.size();

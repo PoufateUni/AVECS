@@ -33,7 +33,7 @@
             <div class="form-group"><br></div>
             <!-- -informaciÃ³n personal -->
             <div class="form-group container input-group" style="width: 50%">
-                <label>NÃºmero de identificaciÃ³n <span class="glyphicon glyphicon-asterisk"></span></label>
+                <label>Número de identificación <span class="glyphicon glyphicon-asterisk"></span></label>
 
                 <input class="form-control" name="id"type="number" maxlength="10" placeholder="#"required>
                   <select name="tipoid" id="id"> 
@@ -47,7 +47,7 @@
             </div>
             
             <div class="form-group container input-group" style="width: 50%">
-                <label>GÃ©nero<span class="glyphicon glyphicon-user"></span></label>
+                <label>Género<span class="glyphicon glyphicon-user"></span></label>
 
                  <select name="genero" id="genero"> 
                 
@@ -100,59 +100,7 @@
 			  
                 <label>Seleccionar Eps</label>
                 <select class="form-control" name="eps" id="">
-                    <option value="1" selected>Salud Colmena E.P.S. S.A.
-                    </option>
-                    <option value="2">Salud Total S.A. E.P.S.
-</option>
-                    <option value="3">Cafesalud E.P.S. S.A.
-
-</option>
-                    <option value="5">E.P.S.Â  Sanitas S.A.
-</option>
-                      <option value="7">E.P.S. Unimec - LiquidaciÃ³n
-</option>
-                        <option value="8">CompensarÂ  E.P.S.
-</option>
-                          <option value="9">EPS Prog. Comfenalco Antioquia
-</option>
-                            <option value="10">SuSalud EPS - (Suramericana)
-</option>
-                              <option value="11">Colseguros E.P.S.
-</option>
-                                <option value="12">Colseguros E.P.S.
-</option>
-                                  <option value="13">E.P.S.Â  Saludcoop
-</option>
-                                    <option value="14">E.P.S.Â  Saludcoop
-</option>
-                                      <option value="15">EPS Servicios Medicos Colpatria
-</option>
-                                        <option value="16">Coomeva E.P.S.
-</option>
-                             <option value="17">E.P.S. Famisanar LTDA.Â  CAFAM-COLSUBSIDIO
-
-</option>
-                             <option value="18">E.P.S Servicio Occidental de Salud S.A.-EPS-S.O.S.
-
-</option>
-                             <option value="23">Cruz Blanca E.P.S. S.A.
-
-
-
-</option>
-                             <option value="26">Solsalud S.A. EPS.
-
-
-</option>
-                             <option value="33">SALUDVIDA S.A. EPS
-
-</option>
-                             <option value="34">SALUDCOLOMBIA EPS S.A.
-
-</option>
-                             <option value="35">RED SALUD ATENCION HUMANA EPS S.A.
-
-</option>
+                   
                 </select>
                 
             </div>
@@ -162,13 +110,13 @@
 			
 
             <div class="form-group container input-group" style="width: 50%">
-                <label>CÃ³digo<span class="glyphicon glyphicon-education" ></span></label>
+                <label>Código<span class="glyphicon glyphicon-education" ></span></label>
 		
                 <input class="form-control" type="number" name="codigo" maxlength="7" placeholder="Codigo"required>
             </div>
 
             <div class="form-group container input-group" style="width: 50%">
-                <label>ContraseÃ±a <span class="glyphicon glyphicon-lock"></span> </label>
+                <label>Contraseñaa <span class="glyphicon glyphicon-lock"></span> </label>
                 <input class="form-control" name="pass" type="password" placeholder="ContraseÃ±a" required/>
             </div>
             <div class="form-group">

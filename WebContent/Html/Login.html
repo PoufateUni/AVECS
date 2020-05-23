@@ -24,7 +24,7 @@
         <form action="../IniciarSesion" method="post">
             <div class="form-group container input-group" style="width: 50%">
                 <label>Usuario <span class="glyphicon glyphicon-user"></span> </label>
-                <input class="form-control" name="id"type="text" placeholder="número identificación" required/>
+                <input class="form-control" name="id"type="number" placeholder="número identificación" required/>
             </div>
 
             <div class="form-group container input-group" style="width: 50%">
@@ -55,40 +55,11 @@
 
             <div class="form-group">
                 <div class=" col-xs-12" style="text-align: center">
-                    <p><a href="#VF-OlvidasteContraseña" data-toggle="modal">¿Olvidaste tu contraseña?</a></p>
-                    <p><a href="Registrarse.html">Registrarse</a></p>
+                    <p><a href="recuperarContrasena.html">¿Olvidaste tu contraseña?</a></p>
+                    <p><a href="Registrarse.jsp">Registrarse</a></p>
                 </div>
             </div>
 
-            <div class="form-group">
-
-                <div class="modal fade" id="VF-OlvidasteContraseña">
-                <form action="../RecuperarContraseña"method="post">
-                  <div class="modal-dialog">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;&nbsp</button>
-                            <!--MODAL-HEADER-->
-                            <h4 style="text-align: center;">Recuperar Contraseña</h4>
-
-                            <div class="form-group container input-group" style="width: 50%">
-                                <label>E-mail <span class="glyphicon glyphicon-envelope"></span></label>
-                                <input class="form-control" name="correo"type="email" placeholder="Correo institucional"/>
-                                
-                                <div class="form-group" style="margin: 50px;">
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                    <button type="submit"class="btn btn-danger col-xs-10 col-lg-6">Enviar</button>
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                </div>
-                            </div>
-                            
-
-                        </div>
-                    </div>
-                </form>
-                  
-                </div>
-            </div>
 
         </form>
     </div>
