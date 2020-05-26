@@ -107,8 +107,8 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 	 Persona tempp= pd.find(idP);
 	 if(tempp !=null ) {
 			out.println("<script type=\"text/javascript\">");
-			out.println("alert('esta persona ya ha sido registrada previamente');");
-			 out.println("location='Html/Registrarse.html';");
+			out.println("alert('la persona con esta identificación ya ha sido registrada previamente');");
+			 out.println("history.back();");
 			  out.println("</script>");
 	 }else {
 		 //verificacion de repetidos en estudiante

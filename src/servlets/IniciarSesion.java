@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Administrador;
 import entidades.Persona;
 import entidades.TipoUsuario;
 import entidades.Usuario;
+import modelo.AdministradorDao;
 import modelo.PersonaDao;
 import modelo.TipoUsuarioDao;
 import modelo.UsuarioDao;
@@ -68,7 +70,7 @@ public class IniciarSesion extends HttpServlet {
 				
 		if(sesion.getAttribute("usuario")!=null) {
 			Usuario ost= (Usuario)sesion.getAttribute("usuario");
-			System.out.println(ost.getIdUsuario());
+			System.out.println("intento de inicio:"+ost.getIdUsuario());
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('ya has iniciado');");
 			 out.println("location='index.jsp';");
@@ -82,12 +84,13 @@ public class IniciarSesion extends HttpServlet {
 		int tipoUsuario=Integer.parseInt( request.getParameter("tipoUsuario"));
 		System.out.print("tipo de usuario="+tipoUsuario);
 		int id= Integer.parseInt( request.getParameter("id"));
-
+		int tipoUsuarioBusqueda=tipoUsuario;
+		if(tipoUsuario==3)tipoUsuarioBusqueda=1;
 		
 		TipoUsuarioDao tud = new TipoUsuarioDao();
 		boolean encontrado=false;
 		tu=tud.find(tipoUsuario);
-		if(usud.usuarioExists(id, tipoUsuario)==1)encontrado=true;
+		if(usud.usuarioExists(id, tipoUsuarioBusqueda)==1)encontrado=true;
 
 		if(!encontrado) {
 			out.println("<script type=\"text/javascript\">");
@@ -95,6 +98,33 @@ public class IniciarSesion extends HttpServlet {
 			 out.println("location='Html/Login.html';");
 			  out.println("</script>");
 		}else {
+			if(tipoUsuario==3) {
+				Administrador administrador= new Administrador();
+				AdministradorDao administradorDao = new AdministradorDao();
+				administrador= administradorDao.find(id);
+				try {
+					if(administrador.getContrasena().equals(pass)) {
+						sesion.setAttribute("usuario", administrador.getProfesor().getPersona_id_Persona());
+						sesion.setAttribute("nombre", "administrador: "+administrador.getProfesor().getPersona().getNombre());
+						sesion.setAttribute("tipo_usu",3);
+						sesion.setAttribute("verificado",0);
+						sesion.setMaxInactiveInterval(10*60);
+						out.println("<script type=\"text/javascript\">");
+						
+						 out.println("location='index.jsp';");
+						  out.println("</script>");
+					}
+				}catch(NullPointerException e) {
+					e.printStackTrace();
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('no se encuentra este Administrador');");
+					 out.println("location='Html/Login.html';");
+					  out.println("</script>");
+				}
+				
+			}else {
+			
+			
 			usu=usud.find(id);
 			System.out.println(id);
 			
@@ -123,7 +153,7 @@ public class IniciarSesion extends HttpServlet {
 				  out.println("</script>");
 			}
 		}
-		
+		}
 		}
 		
 	}

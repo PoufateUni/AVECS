@@ -52,17 +52,18 @@
          if(tipo==0||tipo==2){
     
     %>
+    <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoAsistencias">Listado de Asistencias</a></li>
     
-    <%=tipo %>
-    <%		
-    }else if(session.getAttribute("tipo_usu").equals(1)){
+    <%	//separacion hecha para posibles cambios en el futuro	
+    }else if(session.getAttribute("tipo_usu").equals(1)){//CUANDO EL TIPO DE USUARIO ES PROFESOR
     	%>
-    	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="Html/SesionDocente.jsp">Administrar Perfil</a></li>
+    	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoVisitas">Administrar Perfil</a></li>
     	  <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="RegistrarVisita">Crear Visita</a></li>
     	<%
-    }else{
+    }else if(session.getAttribute("tipo_usu").equals(3)){//CUANDO EL TIPO DE USUARIO ES ADMINISTRADOR
     	%>
-   	
+   		<li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoVisitas">Administrar Perfil</a></li>
+    	<li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="RegistrarVisita">Crear Visita</a></li>
    	<%
     }
          %>
@@ -72,6 +73,10 @@
     </div><% 
     }
     %>
+    
+    
+    
+    <!-- listado de ultimas 10 Visitas registradas -->
          
 	<div class="container-fluid">
 <div class="catalogo" >
@@ -107,24 +112,10 @@
 	<%
 		}%>
 		</div>
-		
-		
-		  
-		
-		
-	
-	
-	
-	
 
-	
 	
 	</div>
 
-
-
-	
-  
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

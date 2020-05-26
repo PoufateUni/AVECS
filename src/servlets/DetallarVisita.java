@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -52,12 +53,13 @@ public class DetallarVisita extends HttpServlet {
 		request.setAttribute("empresaId",v.getEmpresa().getRut());
 		request.setAttribute("titulo", v.getTitulo());
 		request.setAttribute("descripcion", v.getDescripcion());
+		request.setAttribute("idVisita",v.getIdVisita());
 		Date fechaIn  = v.getFechaVisitaInicio();
 		Date fechaFin  = v.getFechaVisitaSalida();
 		Long diasI=fechaIn.getTime();
 		Long diasF=fechaFin.getTime();
 		
-		request.setAttribute("duracion", ((diasF-diasI)/(3600*24)));
+		request.setAttribute("duracion", ((diasF-diasI)/(86400000)));
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Html/VisitaDetalle.jsp");
 		rd.forward(request, response);
 		
@@ -69,10 +71,23 @@ public class DetallarVisita extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		if(sesion.getAttribute("usuario")!=null && sesion.getAttribute("tipo_usu")!="1") {}else {}
+		if(sesion.getAttribute("usuario")!=null && sesion.getAttribute("tipo_usu")!="1") {
+			System.out.println("aun no registramos XD");
 		
-		Asistencia asistencia = new Asistencia();
-		AsistenciaDao asistenciadao= new AsistenciaDao();
+		
+		
+		}else {
+			PrintWriter out= response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('No deberías estar aquí');");
+			 out.println("location='index.jsp';"); 
+			out.println("</script>");
+			
+		}
+		
+		
+		
+		
 	}
 
 }

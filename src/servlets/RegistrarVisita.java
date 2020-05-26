@@ -17,13 +17,14 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Empresa;
 import entidades.Grupo;
-
+import entidades.Profesor;
 import entidades.Visita;
 import modelo.EmpresaDao;
 import modelo.GrupoDao;
 import modelo.MateriaDao;
 import modelo.MunicipioDao;
 import modelo.VisitaDao;
+import utilidades.Conexion;
 
 /**
  * Servlet implementation class RegistrarVisita
@@ -48,20 +49,24 @@ public class RegistrarVisita extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		
 		boolean usuarioOut=sesion.getAttribute("usuario")!=null;
-		System.out.println(usuarioOut);
-		//arreglar estos condicionales
+		
 		boolean tipoIn=false;
 		if(sesion.getAttribute("tipo_usu")!=null) {
-		tipoIn=sesion.getAttribute("tipo_usu").equals(1);}
+		tipoIn=sesion.getAttribute("tipo_usu").equals(1)||sesion.getAttribute("tipo_usu").equals(3);}
 		if(usuarioOut&&tipoIn)  {
 		int usuario=(int) sesion.getAttribute("usuario");
 		Grupo grupo = new Grupo();
 		MateriaDao materiaDao = new MateriaDao();
 		System.out.println(usuario);
-		List<Empresa> empresas= MateriaDao.getEm().createQuery("from Empresa ").getResultList();
-		List<Grupo> materias = MateriaDao.getEm().createQuery("from Grupo grupo where  grupo.profesor ="+usuario).getResultList();
+		List<Grupo> grupos ;
 	
-		request.setAttribute("listaGrupos", materias);
+		List<Empresa> empresas= MateriaDao.getEm().createQuery("from Empresa ").getResultList();
+		if(sesion.getAttribute("tipo_usu").equals(3)) {
+		grupos = Conexion.getEm().createQuery("from Grupo").getResultList();	
+		}else {
+		grupos = Conexion.getEm().createQuery("from Grupo grupo where  grupo.profesor ="+usuario).getResultList();
+		}
+		request.setAttribute("listaGrupos", grupos);
 	    request.setAttribute("listaEmpresas", empresas);
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Html/RegistroVisita.jsp");
@@ -72,7 +77,7 @@ public class RegistrarVisita extends HttpServlet {
 	
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Error en las credenciales de usuario, asegurese que ha ingresado como docente');");
+			out.println("alert('Error en las credenciales de usuario, asegurese que ha ingresado como docente o Administrador');");
 			 out.println("location='index.jsp';");
 			  out.println("</script>");
 			
@@ -90,7 +95,7 @@ public class RegistrarVisita extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		MunicipioDao md= new MunicipioDao();	
 		if(sesion.getAttribute("usuario")!=null && sesion.getAttribute("tipo_usu")!="1") {
-			int usuario = (Integer)sesion.getAttribute("usuario");
+		int usuario = (Integer)sesion.getAttribute("usuario");
 		
 		int grupo=Integer.parseInt((request.getParameter("grupo")));
 		int empresa =Integer.parseInt(request.getParameter("empresa"));

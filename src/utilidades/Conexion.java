@@ -51,6 +51,7 @@ public class Conexion<T> {
 	}
 	
 	public int usuarioExists(int id, int tipo) {
+		@SuppressWarnings("unchecked")
 		List<Estudiante> resultados=em.createQuery("from Usuario usuario where "
 				+ "usuario.idUsuario ="+id+ "AND usuario.tipoUsuario="+tipo).getResultList();
 		
@@ -59,12 +60,14 @@ public class Conexion<T> {
 	
 	
 	public int findByCodigoEstudiante(String codigo) {
+		@SuppressWarnings("unchecked")
 		List<Estudiante> resultados=em.createQuery("select estudiante.codigo from Estudiante estudiante where "
 				+ "estudiante.codigo=" +codigo).getResultList();
 		
 				return resultados.size();
 	}
 	public int findByCodigoProfesor(String codigo) {
+		@SuppressWarnings("unchecked")
 		List<Profesor> resultados=em.createQuery("select pro.codigoProfesor from Profesor pro where "
 				+ "pro.codigoProfesor=" +codigo).getResultList();
 		
@@ -97,6 +100,7 @@ public class Conexion<T> {
 			em.getTransaction().begin();
 			em.merge(o);
 			em.getTransaction().commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
