@@ -17,6 +17,7 @@ public class Visita implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	
 	private int idVisita;
 
 	@Column(name="cupos_disponibles")

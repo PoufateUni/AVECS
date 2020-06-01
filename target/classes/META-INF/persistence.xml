@@ -20,6 +20,7 @@
 		<class>entidades.Municipio</class>
 		<class>entidades.Departamento</class>
 		<class>entidades.Eps</class>
+		<class>entidades.Prueba</class>
 		<properties>
 			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://avecsdb.mysql.database.azure.com:3306/mydb?useSSL=true"/> -->
 			<!-- <property name="javax.persistence.jdbc.user" value="adminserver@avecsbd"/> -->

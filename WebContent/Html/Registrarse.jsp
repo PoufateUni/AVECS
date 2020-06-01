@@ -20,6 +20,8 @@
 <body>
 
 <%   EpsDao epsDao = new EpsDao();
+	List<Eps> epss=epsDao.getEm().createQuery("from Eps").getResultList();
+
     %>
     <header>
         <div class="container">
@@ -27,10 +29,23 @@
         </div>
     </header>
     <div class="container">
-
+	
+	
+	
+	
         <h2 class="text-center">Registrarse</h2>
         <form method="post" action="../registrarestudiante">
             <div class="form-group"><br></div>
+                <div class="form-group container input-group" style="width: 50%">
+                <label>Seleccionar tipo de usuario</label>
+                <select class="form-control" name="tipoUsuario" id="">
+                    <option value="0" selected>Estudiante</option>
+                    <option value="1">Docente</option>
+                    <option value="2">Empresa</option>
+                    <option value="3">Administrador</option>
+                </select>
+            </div>
+            
             <!-- -informaciÃ³n personal -->
             <div class="form-group container input-group" style="width: 50%">
                 <label>Número de identificación <span class="glyphicon glyphicon-asterisk"></span></label>
@@ -85,27 +100,27 @@
             </div>
 
 
-            <div class="form-group container input-group" style="width: 50%">
-                <label>Seleccionar Usuario</label>
-                <select class="form-control" name="tipoUsuario" id="">
-                    <option value="0" selected>Estudiante</option>
-                    <option value="1">Docente</option>
-                    <option value="2">Empresa</option>
-                    <option value="3">Administrador</option>
-                </select>
-            </div>
+        
+		
 		
 			
-			  <div class="form-group container input-group" style="width: 50%">
-			  
+			   <div class="form-group container input-group" style="width: 50%">
                 <label>Seleccionar Eps</label>
-                <select class="form-control" name="eps" id="">
-                   
-                </select>
-                
+                 <select name="eps" id="lista_eps" required> 
+					
+					
+					<%
+					for(int i=0;i<epss.size();i++){
+						%>
+						<option value="<%=epss.get(i).getId() %>"><%=epss.get(i).getNombre()%></option>
+					<%	
+					}
+					
+					%>
+
+				   </select> 
+        
             </div>
-			
-			
 		
 			
 

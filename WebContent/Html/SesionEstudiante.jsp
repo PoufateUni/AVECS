@@ -79,7 +79,7 @@ if(asistencias.size()>0){
 	
 	
 	//COMPROBACION DE Eliminacion PENDIENTE
-	<a class="btn btn-danger" href="EliminarAsistencia?<%=asistencias.get(i).getIdAsistencia()%>">Eliminar</a>
+	<a class="btn btn-danger" href="EliminarInscripcionEstudiante?<%=asistencias.get(i).getIdAsistencia()%>">Eliminar</a>
 	</div>
 	
 	</div>

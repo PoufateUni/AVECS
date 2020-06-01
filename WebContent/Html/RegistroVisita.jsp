@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@page import="java.util.List"%>
     <%@page import="entidades.Grupo"%>
@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="ISO-8859-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css" /> 
@@ -60,7 +60,7 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
         
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Empresa a la que visitar√°</label>
+                <label>Empresa a la que visitar·</label>
                  <select name="empresa" id="listaEmpresa"required> 
 				
 					
@@ -134,9 +134,9 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
 
     <footer style="visibility: hidden;">
         <div>
-            <p>Programa de Comunicaci√≥n Social - Universidad Francisco de Paula Santander</p>
-            <p>Tel√©fono (057)(7) 5776655</p>
-            <p>Correo electr√≥nico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+            <p>Programa de ComunicaciÛn Social - Universidad Francisco de Paula Santander</p>
+            <p>TelÈfono (057)(7) 5776655</p>
+            <p>Correo electrÛnico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
         </div>
     </footer>
 

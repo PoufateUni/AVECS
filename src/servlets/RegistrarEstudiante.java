@@ -19,6 +19,7 @@ import entidades.Profesor;
 import entidades.TipoId;
 import entidades.TipoUsuario;
 import entidades.Usuario;
+import modelo.EpsDao;
 import modelo.EstudianteDao;
 import modelo.GeneroDao;
 import modelo.PersonaDao;
@@ -75,6 +76,7 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 	 Usuario usuario= new Usuario();
 	 UsuarioDao usd= new UsuarioDao();
 	 PersonaDao  pd = new PersonaDao();
+	 EpsDao epsDao= new EpsDao();
 	 //asignacion de variables para objeto persona usado
 	 Integer idP= Integer.parseInt(request.getParameter("id"));
 	 String nombres=request.getParameter("nombres");
@@ -134,6 +136,7 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 					 
 						 Estudiante es= new Estudiante();
 						 EstudianteDao esd= new EstudianteDao();
+						 es.setEps(epsDao.find(request.getParameter("eps")));
 						 es.setCodigo(request.getParameter("codigo"));
 						 es.setPersona(pd.find(idP));
 						 es.setPersona_id_Persona(idP);

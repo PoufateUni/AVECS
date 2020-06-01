@@ -62,7 +62,7 @@ public class Conexion<T> {
 	public int findByCodigoEstudiante(String codigo) {
 		@SuppressWarnings("unchecked")
 		List<Estudiante> resultados=em.createQuery("select estudiante.codigo from Estudiante estudiante where "
-				+ "estudiante.codigo=" +codigo).getResultList();
+				+ "estudiante.codigo='" +codigo+"'").getResultList();
 		
 				return resultados.size();
 	}
@@ -84,9 +84,11 @@ public class Conexion<T> {
 	
 	public void insert(T o){
 		try {
+			
 			em.getTransaction().begin();
 			em.persist(o);
 			em.getTransaction().commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -97,6 +99,7 @@ public class Conexion<T> {
 	
 	public void update(T o){
 		try {
+			
 			em.getTransaction().begin();
 			em.merge(o);
 			em.getTransaction().commit();
@@ -111,6 +114,7 @@ public class Conexion<T> {
 	
 	public void delete(T o){
 		try {
+		
 			em.getTransaction().begin();
 			em.remove(o);
 			em.getTransaction().commit();

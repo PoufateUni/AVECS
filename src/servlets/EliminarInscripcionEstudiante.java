@@ -60,7 +60,7 @@ public class EliminarInscripcionEstudiante extends HttpServlet {
 			Asistencia asistencia= new Asistencia();
 			AsistenciaDao asistenciaDao = new AsistenciaDao();
 			VisitaDao vd= new VisitaDao();
-			Visita v= vd.find(request.getAttribute("idVisita"));
+			Visita v= vd.find(request.getAttribute("id"));
 		    asistencia=(Asistencia) Conexion.getEm().createQuery("Select Asistencia where estudiante="+usuario+"And visita="+v.getIdVisita()+";").getSingleResult();
 			if(!asistencia.equals(null)) {
 				

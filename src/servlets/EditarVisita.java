@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Session;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -115,9 +115,7 @@ public class EditarVisita extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		  System.out.println(request.getParameter("cupos"));
-	    Date fechaIn  = new Date();
-		Date fechaFin  = new Date();
+		
 		VisitaDao vd= new VisitaDao();
 		EmpresaDao empresaDao= new EmpresaDao();
 		GrupoDao grupoDao=new GrupoDao();
@@ -128,14 +126,16 @@ public class EditarVisita extends HttpServlet {
 	    v.setCuposDisponibles(request.getParameter("cupos"));
 
 	    v.setEmpresa(empresaDao.find((Integer.parseInt(request.getParameter("empresa")))));
-	
+	    Date fechaIn  = new Date();
+		Date fechaFin  = new Date();
+		
 		 try {
 				fechaIn= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicio"));
 			} catch (ParseException e1) {
 				
 				e1.printStackTrace();
 			}
-		
+		 v.setFechaVisitaInicio(fechaIn);
 		 try {
 			 fechaFin= new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFin"));
 			} catch (ParseException e1) {
@@ -153,15 +153,15 @@ public class EditarVisita extends HttpServlet {
 				  this.destroy();
 			
 		 }
-	    
-	    
-	    
-		 v.setFechaVisitaInicio(fechaIn);
-	    v.setFechaVisitaSalida(fechaFin);
+		 
+		 v.setFechaVisitaSalida(fechaFin);
 	    v.setGrupo(grupoDao.find(Integer.parseInt((request.getParameter("grupo")))));
 	    v.setMunicipio(municipioDao.find(Integer.parseInt(request.getParameter("municipio"))));
+	    System.out.println("activo"+vd.getEm().getTransaction().isActive());
 	    
 	    vd.update(v);
+	   
+	    
 	    PrintWriter out= response.getWriter();
 		out.println("<script type=\"text/javascript\">");
 		out.println("alert('cambio Exitoso');");

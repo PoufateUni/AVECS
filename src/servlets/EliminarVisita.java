@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Visita;
 import modelo.VisitaDao;
+import utilidades.Conexion;
 
 /**
  * Servlet implementation class EliminarVisita
@@ -63,6 +64,7 @@ public class EliminarVisita extends HttpServlet {
 						out.println("</script>");
 					}else {
 						PrintWriter out= response.getWriter();
+						
 						vd.delete(v);
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('visita Eliminada');");

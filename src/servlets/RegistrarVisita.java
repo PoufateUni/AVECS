@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Empresa;
 import entidades.Grupo;
-import entidades.Profesor;
+
 import entidades.Visita;
 import modelo.EmpresaDao;
 import modelo.GrupoDao;
@@ -127,7 +127,7 @@ public class RegistrarVisita extends HttpServlet {
 				out.println("</script>");
 				  this.destroy();
 			
-		 }
+		 }else{
 		 
 		 visita.setFechaVisitaSalida(fechaFin);
 		 visita.setGrupo(grupoDao.find(grupo));
@@ -136,8 +136,10 @@ public class RegistrarVisita extends HttpServlet {
 		 visita.setDescripcion((request.getParameter("descripcion")));
 		 visita.setMunicipio(md.find(municipio));
 		 visita.setCuposDisponibles(request.getParameter("cupos"));
+		 System.out.println("activo"+Conexion.getEm().getTransaction().isActive());
+		 Conexion.getEm().clear();
 		 visitaDao.insert(visita);
-		 
+		 System.out.println("activo"+Conexion.getEm().getTransaction().isActive());
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Registro Exitoso');");
@@ -145,7 +147,7 @@ public class RegistrarVisita extends HttpServlet {
 			  out.println("</script>");
 		 
 		 
-		}else
+		}}else
 		{
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
 			PrintWriter out= response.getWriter();
@@ -154,6 +156,6 @@ public class RegistrarVisita extends HttpServlet {
 			 out.println("location='index.jsp';");
 			  out.println("</script>");
 		}
-	}
+	}}
 
-}
+
