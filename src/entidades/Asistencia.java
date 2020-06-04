@@ -14,14 +14,17 @@ import java.util.Date;
 @NamedQuery(name="Asistencia.findAll", query="SELECT a FROM Asistencia a")
 public class Asistencia implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private int idAsistencia;
 
 	private byte aprobado;
 
 
-	@Temporal(TemporalType.DATE)
+
+	@Temporal(TemporalType.TIMESTAMP)
+	
 	@Column(name="fecha_registro")
 	private Date fechaRegistro;
 

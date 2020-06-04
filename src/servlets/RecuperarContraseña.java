@@ -54,7 +54,11 @@ public class RecuperarContraseña extends HttpServlet {
         String emailReceptor = usuario.getCorreoUsuario();
         ServicioEmail email = new ServicioEmail(emailUsuarioEmisor, clave);
         email.enviarEmail(emailReceptor, "Cambio de Contraseña (Prueba AVECS)", "SU CONTRASEÑA ES=" +usuario.getContrasena());
-		
+    	PrintWriter out = response.getWriter();
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('se ha enviado el correo, por favor revisar');");
+		 out.println("location='index.jsp';");
+		  out.println("</script>");
 		}catch(Exception e){
 			PrintWriter out = response.getWriter();
 			out.println("<script type=\"text/javascript\">");

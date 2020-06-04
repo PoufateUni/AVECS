@@ -55,6 +55,11 @@ public class InscripcionEstudiante extends HttpServlet {
 			VisitaDao vd= new VisitaDao();
 			EstudianteDao estudianteDao = new EstudianteDao();
 		    Visita v= vd.find(Integer.parseInt((String) request.getAttribute("id")));
+		    if(v.getCuposDisponibles()>0) {
+		    	
+		    
+		    
+		    
 		    
 		    try {
 		    	asistencia=(Asistencia) Conexion.getEm().createQuery("from Asistencia asistencia where asistencia.estudiante="+usuario+" and asistencia.visita="+v.getIdVisita()+"").getSingleResult();	
@@ -67,7 +72,10 @@ public class InscripcionEstudiante extends HttpServlet {
 		    	asistencia.setAprobado((byte) 0);
 				asistencia.setEstudiante(estudianteDao.find(usuario));
 				asistencia.setVisita(v);
-				asistenciaDao.insert(asistencia);
+				asistenciaDao.insertExcepcional(asistencia);
+				int cuposDisponibles=v.getCuposDisponibles();
+				v.setCuposDisponibles(cuposDisponibles-1);
+				vd.update(v);
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Registro Exitoso');");
@@ -78,7 +86,13 @@ public class InscripcionEstudiante extends HttpServlet {
 		    
 			
 			
+		}else {
+			PrintWriter out= response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert(' no hay cupos disponibles para esta visita ');");
+			 out.println("location='index.jsp';");
+			  out.println("</script>");
 		}
 	}
 
-}
+}}

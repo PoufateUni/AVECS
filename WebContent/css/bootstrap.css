@@ -6837,6 +6837,21 @@ button.close {
     font-size: 20px;
   }
 }
+#global {
+    height: auto;
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #f1f1f1;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+@media only screen and (max-width:760px){
+  table th,td{
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
 /*@media only screen and (min-width:800px){
   .menu{
     margin: 8px 88%;

@@ -100,7 +100,7 @@ public class RegistrarVisita extends HttpServlet {
 		int grupo=Integer.parseInt((request.getParameter("grupo")));
 		int empresa =Integer.parseInt(request.getParameter("empresa"));
 		int municipio=Integer.parseInt(request.getParameter("municipio"));
-		municipio=7;
+		
 		Date fechaIn  = new Date();
 		Date fechaFin  = new Date();
 		
@@ -135,7 +135,7 @@ public class RegistrarVisita extends HttpServlet {
 		 visita.setTitulo((request.getParameter("titulo")));
 		 visita.setDescripcion((request.getParameter("descripcion")));
 		 visita.setMunicipio(md.find(municipio));
-		 visita.setCuposDisponibles(request.getParameter("cupos"));
+		 visita.setCuposDisponibles(Integer.parseInt(request.getParameter("cupos")));
 		 System.out.println("activo"+Conexion.getEm().getTransaction().isActive());
 		 Conexion.getEm().clear();
 		 visitaDao.insert(visita);

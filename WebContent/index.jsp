@@ -3,6 +3,7 @@
  <%@page import="entidades.Visita"%>
  <%@page import="modelo.VisitaDao" %>
  <%@page import="java.util.List"%>
+ <%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +19,14 @@
 <body>
  
     <%
+   
+
+SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     VisitaDao vd = new VisitaDao();
-    List <Visita> visitas= vd.getEm().createQuery("from Visita order by fechaInsercion  DESC ").setMaxResults(10).getResultList();
+   	
+    
+    List <Visita> visitas= vd.getEm().createQuery("from Visita order by fechaInsercion  DESC ").getResultList();
+    
     %>
     <header style="background: #dd4b39">
         <div class="container">
@@ -45,76 +52,101 @@
     	%>
     	<nav style=" text-align: right;">
         <ul class="menu row">
-            <div class="col-xs-4 col-sm-6 col-md-8 col-lg-6"></div>
+            <div class="col-xs-4 col-sm-6 col-md-8 col-lg-4"></div>
     	     <li class="col-xs-4 col-sm-3 col-md-2 col-lg-3"><a href=""><%=session.getAttribute("nombre") %></a></li>
     	<% 
     	int tipo= (Integer)session.getAttribute("tipo_usu");
          if(tipo==0||tipo==2){
     
     %>
-    <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoAsistencias">Listado de Asistencias</a></li>
+    <li class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="HistoricoAsistencias">Listado de Asistencias</a></li>
     
     <%	//separacion hecha para posibles cambios en el futuro	
     }else if(session.getAttribute("tipo_usu").equals(1)){//CUANDO EL TIPO DE USUARIO ES PROFESOR
     	%>
-    	 <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoVisitas">Administrar Perfil</a></li>
-    	  <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="RegistrarVisita">Crear Visita</a></li>
+    	 <li class="col-xs-4 col-sm-3 col-md-2 "><a href="HistoricoVisitas">Administrar Perfil</a></li>
+    	  <li class="col-xs-4 col-sm-3 col-md-2 "><a href="RegistrarVisita">Crear Visita</a></li>
     	<%
     }else if(session.getAttribute("tipo_usu").equals(3)){//CUANDO EL TIPO DE USUARIO ES ADMINISTRADOR
     	%>
-   		<li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="HistoricoVisitas">Administrar Perfil</a></li>
-    	<li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><a href="RegistrarVisita">Crear Visita</a></li>
+   		<li class="col-xs-4 col-sm-3 col-md-2 "><a href="HistoricoVisitas">Administrar Perfil</a></li>
+    	<li class="col-xs-4 col-sm-3 col-md-2 "><a href="RegistrarVisita">Crear Visita</a></li>
    	<%
     }
          %>
-             <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><form method="get" action="/avecs/IniciarSesion"><button type="submit">salir</button></form></li>
+            
+            <li class="col-xs-4 col-sm-3 col-md-2 "> <a href="#VF-OlvidasteContraseña" class="btn btn-danger " data-toggle="modal">Cerrar Sesion</a></li>
         </ul>
     </nav>
+        <div class="modal fade" id="VF-OlvidasteContraseña">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;&nbsp</button>
+                            <!--MODAL-HEADER-->
+                            <h4 style="text-align: center;">Está seguro de cerrar Sesión?</h4>
+
+                            <div class="form-group container input-group" style="width: 50%">
+                                
+                                
+                                <div class="form-group" style="margin: 50px;">
+                                    <div class="col-xs-1 col-lg-3"></div>
+                                    <a href='IniciarSesion'class="btn btn-danger">Salir</a>
+                                    <div class="col-xs-1 col-lg-3"></div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
     </div><% 
     }
     %>
     
     
     
-    <!-- listado de ultimas 10 Visitas registradas -->
-         
-	<div class="container-fluid">
-<div class="catalogo" >
-	<%
+    
+    <div class="container">
+        <div class="row">
+        
+        
+            <section class="col-xs-12 col-lg-12">
+                <div id="global">
+                <table class="table table-striped table-bordered table-hover table-responsive">
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Fecha inicio</th>
+                        <th>Código grupo</th>
+                        <th>Asignatura</th>
+                        <th>Cupos disponibles</th>
+                    </tr>
+                    <%
 	for(int i=0;i<visitas.size();i++){
 		%>
-	<div class="visita_individual">
-	<div>
-	<p>Empresa =
-	  <%= visitas.get(i).getEmpresa().getNombreRazonSocial() %>
-	</p>
-	<p>Fecha de inicio=
-	  <%= visitas.get(i).getFechaVisitaInicio() %>
-	</p>
-	
-	<div>
-	<p>codigo grupo=
-	  <%= visitas.get(i).getGrupo().getIdGrupo() %>
-	</p>
-	<p>Asignatura=
-	  <%= visitas.get(i).getGrupo().getMateria().getNombre() %>
-	</p>
-	<p>cupos disponibles=
-	  <%= visitas.get(i).getCuposDisponibles() %>
-	</p>
-	<a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a>
-	
-	</div>
-	
-	</div>
-	<br></br>
-	</div>
-	<%
+                     <tr>
+                     <th> <%= visitas.get(i).getEmpresa().getNombreRazonSocial() %></th>
+                     <th><%= format.format(visitas.get(i).getFechaVisitaInicio()) %></th>
+                     
+                     <th><%= visitas.get(i).getGrupo().getIdGrupo() %></th>
+                     <th><%= visitas.get(i).getGrupo().getMateria().getNombre() %></th>
+                     <th><%= visitas.get(i).getCuposDisponibles()%></th>
+                     <th><a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
+                        
+                     
+                     
+                     
+                     </tr>
+                    <%
+                    
 		}%>
-		</div>
+                </table>
+            </div>
+            </section>
+        </div>
+    </div>
+    
 
-	
-	</div>
 
 
     <script src="js/jquery.js"></script>

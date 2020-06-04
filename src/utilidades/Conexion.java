@@ -81,6 +81,10 @@ public class Conexion<T> {
 		return lista;
 	}
 	
+	public void insertExcepcional(T o) {
+		
+		try { if(!em.getTransaction().isActive()) em.getTransaction().begin(); em.persist(o); em.getTransaction().commit(); } catch (Exception e) { em.getTransaction().rollback(); }
+	}
 	
 	public void insert(T o){
 		try {
@@ -88,6 +92,9 @@ public class Conexion<T> {
 			em.getTransaction().begin();
 			em.persist(o);
 			em.getTransaction().commit();
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

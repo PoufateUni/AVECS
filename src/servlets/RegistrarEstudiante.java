@@ -79,6 +79,7 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 	 EpsDao epsDao= new EpsDao();
 	 //asignacion de variables para objeto persona usado
 	 Integer idP= Integer.parseInt(request.getParameter("id"));
+	 Integer idEps= Integer.parseInt(request.getParameter("eps"));
 	 String nombres=request.getParameter("nombres");
 	 String apellido1=request.getParameter("ap1");
 	 String apellido2=request.getParameter("ap2");
@@ -136,7 +137,7 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 					 
 						 Estudiante es= new Estudiante();
 						 EstudianteDao esd= new EstudianteDao();
-						 es.setEps(epsDao.find(request.getParameter("eps")));
+						 es.setEps(epsDao.find(idEps));
 						 es.setCodigo(request.getParameter("codigo"));
 						 es.setPersona(pd.find(idP));
 						 es.setPersona_id_Persona(idP);

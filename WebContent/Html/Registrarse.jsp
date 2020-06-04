@@ -26,6 +26,8 @@
     <header>
         <div class="container">
             <h2>AVECS</h2>
+            <h4>aunque algunos campos no sean relevantes para su tipo de perfil (ejemplo fecha de nacimiento y eps para docentes), 
+             puede escoger cualquiera de estos, no se guardarán, lamentamos las molestias </h4>
         </div>
     </header>
     <div class="container">

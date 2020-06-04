@@ -37,6 +37,8 @@ public class EliminarInscripcionEstudiante extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("id", request.getQueryString());
+		
+		
 		doDelete(request,response);
 	}
 
@@ -52,29 +54,33 @@ public class EliminarInscripcionEstudiante extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AsistenciaDao aD= new AsistenciaDao();
-		Asistencia a = new Asistencia();
+		Visita v = new Visita();
+		VisitaDao vd = new VisitaDao();
 		HttpSession sesion = request.getSession();
 		if(!sesion.getAttribute("usuario").equals(null)&&sesion.getAttribute("tipo_usu").equals(0)) {
 			int usuario=(int)sesion.getAttribute("usuario");
 			Asistencia asistencia= new Asistencia();
 			AsistenciaDao asistenciaDao = new AsistenciaDao();
-			VisitaDao vd= new VisitaDao();
-			Visita v= vd.find(request.getAttribute("id"));
-		    asistencia=(Asistencia) Conexion.getEm().createQuery("Select Asistencia where estudiante="+usuario+"And visita="+v.getIdVisita()+";").getSingleResult();
+			int id= Integer.parseInt(request.getQueryString());
+				 asistencia=asistenciaDao.find(id);	
+			
+		   
 			if(!asistencia.equals(null)) {
-				
+				v=asistencia.getVisita();
+				v.setCuposDisponibles(v.getCuposDisponibles()+1);
+				vd.update(v);
 				asistenciaDao.delete(asistencia);
+				
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Eliminación Exitosa');");
-				 out.println("History.back();");
+				out.println("location='index.jsp';");
 				  out.println("</script>");
 			}else {
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('error de acceso: id usuario no compatible con asistencia dada');");
-				 out.println("History.back();");
+				out.println("location='index.jsp';");
 				  out.println("</script>");
 			}
 	}

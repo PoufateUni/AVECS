@@ -62,9 +62,7 @@ public class IniciarSesion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("contraseña= " +request.getParameter("pass"));
-		System.out.println("usuario= " +request.getParameter("id"));
-		
+	
 		PrintWriter out = response.getWriter();
 				HttpSession sesion = request.getSession();
 				

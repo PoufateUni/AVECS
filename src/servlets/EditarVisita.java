@@ -123,7 +123,7 @@ public class EditarVisita extends HttpServlet {
 	    Visita v= vd.find(Integer.parseInt(request.getParameter("idVisita")));
 	    v.setTitulo(request.getParameter("titulo"));
 	    v.setDescripcion(request.getParameter("descripcion"));
-	    v.setCuposDisponibles(request.getParameter("cupos"));
+	    v.setCuposDisponibles(Integer.parseInt(request.getParameter("cupos")));
 
 	    v.setEmpresa(empresaDao.find((Integer.parseInt(request.getParameter("empresa")))));
 	    Date fechaIn  = new Date();
@@ -157,7 +157,7 @@ public class EditarVisita extends HttpServlet {
 		 v.setFechaVisitaSalida(fechaFin);
 	    v.setGrupo(grupoDao.find(Integer.parseInt((request.getParameter("grupo")))));
 	    v.setMunicipio(municipioDao.find(Integer.parseInt(request.getParameter("municipio"))));
-	    System.out.println("activo"+vd.getEm().getTransaction().isActive());
+	   
 	    
 	    vd.update(v);
 	   

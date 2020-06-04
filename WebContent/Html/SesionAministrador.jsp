@@ -3,6 +3,7 @@
  <%@page import="entidades.Visita"%>
  <%@page import="modelo.VisitaDao" %>
  <%@page import="java.util.List"%>
+  <%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
 
 <body>
 <%
-   
+SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 	List <Visita> visitas;
     visitas= (List) request.getAttribute("listaVisitas");
     %>
@@ -47,56 +48,91 @@
         </div>
     </div>
 
-    <div class="container">
+    
        
-       <div class="catalogo" >
+      <div class="catalogo" >
 <%
 if(visitas.size()>0){
 
+	%>
+	<div class="container">
+        <div class="row">
+        
+        
+            <section class="col-xs-12 col-lg-12">
+                <div id="global">
+                <table class="table table-striped table-bordered table-hover table-responsive">
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Fecha inicio</th>
+                        <th>Código grupo</th>
+                        <th>Asignatura</th>
+                        <th>Cupos disponibles</th>
+                    </tr>
+                    <%
 	for(int i=0;i<visitas.size();i++){
 		%>
-	<div class="visita_individual">
-	<div>
-	<p>Empresa =
-	  <%= visitas.get(i).getEmpresa().getNombreRazonSocial() %>
-	</p>
-	<p>Fecha de inicio=
-	  <%= visitas.get(i).getFechaVisitaInicio() %>
-	</p>
+                     <tr>
+                     <th> <%= visitas.get(i).getEmpresa().getNombreRazonSocial() %></th>
+                     <th><%= format.format(visitas.get(i).getFechaVisitaInicio()) %></th>
+                     
+                     <th><%= visitas.get(i).getGrupo().getIdGrupo() %></th>
+                     <th><%= visitas.get(i).getGrupo().getMateria().getNombre() %></th>
+                     <th><%= visitas.get(i).getCuposDisponibles()%></th>
+                     <th><a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
+                     <th><a href="EditarVisita?<%=visitas.get(i).getIdVisita()%>">Editar</a></th>
+                     <th><a href="#VF-Confirmacion" class="btn btn-danger " data-toggle="modal">Eliminar Visitas</a></th>
+
+                     </tr>
+                     <div class="modal fade" id="VF-Confirmacion">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;&nbsp</button>
+                            <!--MODAL-HEADER-->
+                            <h4 style="text-align: center;">Está seguro de Eliminar esta Visita?</h4>
+
+                            <div class="form-group container input-group" style="width: 50%">
+                                
+                                
+                                <div class="form-group" style="margin: 50px;">
+                                <p>recuerde que al eliminar esta Visita, todos los datos se elimarán junto con la lista de asistencia se perderá </p>
+                                    <div class="col-xs-1 col-lg-3"></div>
+                                    <a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>"class="btn btn-danger">Confirmar</a>
+                                    <div class="col-xs-1 col-lg-3"></div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
 	
-	<div>
-	<p>codigo grupo=
-	  <%= visitas.get(i).getGrupo().getIdGrupo() %>
-	</p>
-	<p>Asignatura=
-	  <%= visitas.get(i).getGrupo().getMateria().getNombre() %>
-	</p>
-	<p>cupos disponibles=
-	  <%= visitas.get(i).getCuposDisponibles() %>
-	</p>
-	<a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a>
-	<a href="EditarVisita?<%=visitas.get(i).getIdVisita()%>">Editar</a>
-	//COMPROBACION DE Eliminacion PENDIENTE
-	<a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>">Eliminar</a>
-	</div>
-	
-	</div>
-	<br></br>
-	</div>
-	<%
-		}}else{%>
-<h4>Actualmente no existen visistas asignadas</h4>
+                    <%
+                    
+		}%>
+                </table>
+                
+            </div>
+            </section>
+            
+        </div>
+    </div>
+		<%
+		}else{%>
+<h4>Actualmente no tiene visistas asignadas</h4>
 <%
 }
-
-
-
 %>
-		</div>
+		
+	
+	
+	</div>
+	
        
        
        
-    </div>
+    
 
     
     

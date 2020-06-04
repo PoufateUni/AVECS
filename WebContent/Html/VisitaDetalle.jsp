@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  <%@page import="java.text.SimpleDateFormat" %>
+  <%@page import=" java.util.Date" %>
+ 
     
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +20,9 @@
 
 
 <body>
+<%
+SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+%>
     <header>
         <div class="container">
             <h2>AVECS</h2>
@@ -72,12 +78,12 @@
             </div>
            
             <div class="form-group container input-group" style="width: 50%">
-             <label>Fecha Inicio=</label>
-               <p><c:out value="${requestScope.fechaIn}"></c:out></p>
+             <label>Fecha Inicio=<c:out value="${requestScope.fechaIn}"></c:out></label>
+              
              </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Fecha fin= </label>
-                <p><c:out value="${requestScope.fechaFinal}"></c:out></p>
+                <label>Fecha fin= <c:out value="${requestScope.fechaFinal}"></c:out> </label>
+    
                 </div>
            
             <div class="form-group container input-group" style="width: 50%">
@@ -92,13 +98,14 @@
 
 
             <div class="form-group">
+            
               <%
-                if(session.getAttribute("usuario")!=null&&session.getAttribute("tipo_usu").equals(0)){
+                if(session.getAttribute("usuario")!=null&&session.getAttribute("tipo_usu").equals(0)&&!(request.getAttribute("cupos").equals("0"))){
                 
                 %>
                 
         
-                //verificacion de deseo de inscripcion
+            
                 <a class="btn btn-danger" href="InscripcionEstudiante?${requestScope.idVisita}" >Registrarme en esta visita</a>
           
           <%

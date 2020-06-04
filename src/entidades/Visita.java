@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,18 +20,20 @@ public class Visita implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idVisita;
 
 	@Column(name="cupos_disponibles")
-	private String cuposDisponibles;
+	private int cuposDisponibles;
 
 	
+	@Type(type = "date")
 
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name="fecha_visita_inicio")
 	private Date fechaVisitaInicio;
-
+	
+	@Type(type = "date")
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_visita_salida")
 	private Date fechaVisitaSalida;
@@ -110,11 +115,11 @@ public class Visita implements Serializable {
 		this.idVisita = idVisita;
 	}
 
-	public String getCuposDisponibles() {
+	public int getCuposDisponibles() {
 		return this.cuposDisponibles;
 	}
 
-	public void setCuposDisponibles(String cuposDisponibles) {
+	public void setCuposDisponibles(int cuposDisponibles) {
 		this.cuposDisponibles = cuposDisponibles;
 	}
 

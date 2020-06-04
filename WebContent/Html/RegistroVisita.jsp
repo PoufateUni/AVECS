@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@page import="java.util.List"%>
     <%@page import="entidades.Grupo"%>
@@ -8,10 +8,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="ISO-8859-1" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css" /> 
+
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\css\component-chosen.css" /> 
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}\css\component-chosen.min.css" /> 
 
 
     <title>Registrar Visita</title>
@@ -22,6 +25,13 @@
     <header>
         <div class="container">
             <h2>AVECS</h2>
+            <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/js\municipios.js'></script>
+  <script type="text/javascript"src="${pageContext.request.contextPath}/js\jquery-3.4.1.min.js"></script>
+  <script type="text/javascript"src="${pageContext.request.contextPath}/js\chosen.jquery.js" type="text/javascript"></script>
         </div>
     </header>
 
@@ -60,7 +70,7 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
         
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Empresa a la que visitar�</label>
+                <label>Empresa a la que visitará</label>
                  <select name="empresa" id="listaEmpresa"required> 
 				
 					
@@ -80,18 +90,56 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
 				  
 				   
 				   
-            <div class="form-group container input-group" style="width: 50%">
-                <label>Departamento</label>
-                <select name="departamento" id="" class="form-control">
-                    <option value="">Seleccionar Departamento</option>
+            
+                <label>Departamentos</label>
+                <select name="departamento" id="Departamento" data-placeholder="- Seleccione Departamento -" class="form-control chosenDepartamento" onchange="change(this.id, 'mun')">
+               
+                 
+<option value="5 " >ANTIOQUIA </option>
+<option value="8 " >ATLÁNTICO </option>
+<option value="11">BOGOTÁ, D.C. </option>
+<option value="13">BOLÍVAR </option>
+<option value="15">BOYACÁ </option>
+<option value="17">CALDAS </option>
+<option value="18">CAQUETÁ </option>
+<option value="19">CAUCA </option>
+<option value="20">CESAR </option>
+<option value="23">CÓRDOBA </option>
+<option value="25">CUNDINAMARCA </option>
+<option value="27">CHOCÓ </option>
+<option value="41">HUILA </option>
+<option value="44">LA GUAJIRA </option>
+<option value="47">MAGDALENA </option>
+<option value="50">META </option>
+<option value="52">NARIÑO </option>
+<option value="54">NORTE DE SANTANDER </option>
+<option value="63">QUINDIO </option>
+<option value="66">RISARALDA </option>
+<option value="68">SANTANDER </option>
+<option value="70">SUCRE </option>
+<option value="73">TOLIMA </option>
+<option value="76">VALLE DEL CAUCA </option>
+<option value="81">ARAUCA </option>
+<option value="85">CASANARE </option>
+<option value="86">PUTUMAYO </option>
+<option value="88">ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA </option>
+<option value="91">AMAZONAS </option>
+<option value="94">GUAINÍA </option>
+<option value="95">GUAVIARE </option>
+<option value="97">VAUPÉS </option>
+<option value="99">VICHADA </option>
                 </select>
-            </div>
-            <div class="form-group container input-group" style="width: 50%">
+
+           
                 <label>Municipio</label>
-                <select name="municipio" id="" class="form-control">
-                    <option value="66">Seleccionar Municipio</option>
-                </select>
-            </div>
+                  <select id="mun" name="municipio" data-placeholder="- Seleccione Municipio -" class="form-control chosenMunicipio">
+      
+      <option value=""></option>
+      </select>
+      
+            
+            
+ 
             <div class="form-group container input-group" style="width: 50%">
                 
             </div>
@@ -134,13 +182,29 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
 
     <footer style="visibility: hidden;">
         <div>
-            <p>Programa de Comunicaci�n Social - Universidad Francisco de Paula Santander</p>
-            <p>Tel�fono (057)(7) 5776655</p>
-            <p>Correo electr�nico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
+            <p>Teléfono (057)(7) 5776655</p>
+            <p>Correo electrónico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
         </div>
     </footer>
 
  <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='${pageContext.request.contextPath}/js\municipios.js'></script>
+  <script src="${pageContext.request.contextPath}/js\jquery-3.4.1.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js\chosen.jquery.js" type="text/javascript"></script>
+     <script>
+    //chosen institución
+    $('.chosenDepartamento, .chosenMunicipio').chosen({ no_results_text: "No hay resultados...", allow_single_deselect: true });
+    $(".chosenDepartamento").chosen().on("change", function (event) {
+      document.getElementById('mun').value = "";
+      $(".chosenMunicipio").trigger('chosen:updated');
+    });
+    $(".chosenMunicipio").chosen().on("chosen:showing_dropdown", function (event) {
+      $(".chosenMunicipio").trigger('chosen:updated');
+    });
+  </script>
 </body>
 
