@@ -73,12 +73,14 @@
 					<option value="2">Femenino
 					<option value="3"selected>Otro
 				 </select> 
+			</div>
+		<div class="form-group container input-group" style="width: 50%">
 				 <label>Fecha de Nacimiento</label>
 				  <input  name="fecha_nacimiento"type="date" maxlength="10" required>
             </div>
             
             <div class="form-group container input-group" style="width: 50%">
-                <label>Nombres</span></label>
+                <label>Nombres</label>
 
                 <input class="form-control" name="nombres"type="text" maxlength="45"required>
             </div>

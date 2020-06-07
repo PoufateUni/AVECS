@@ -16,13 +16,17 @@ public class Empresa implements Serializable {
 
 	@Id
 	private int rut;
-
+	@Column(name="correo")
+	private String correo;
+	
+	private byte natural_juridica; 
+	
 	private String direccion;
 
 	@Column(name="nombre_razon_social")
 	private String nombreRazonSocial;
 
-	private String telefono;
+	private int telefono;
 
 	//bi-directional many-to-one association to Persona
 	@ManyToOne
@@ -40,12 +44,28 @@ public class Empresa implements Serializable {
 		this.rut = rut;
 	}
 
+	public byte getNatural_juridica() {
+		return natural_juridica;
+	}
+
+	public void setNatural_juridica(byte natural_juridica) {
+		this.natural_juridica = natural_juridica;
+	}
+
 	public String getDireccion() {
 		return this.direccion;
 	}
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public String getCorreo_contacto() {
+		return this.correo;
+	}
+
+	public void setCorreo_contacto(String correo_contacto) {
+		this.correo = correo_contacto;
 	}
 
 	public String getNombreRazonSocial() {
@@ -56,11 +76,11 @@ public class Empresa implements Serializable {
 		this.nombreRazonSocial = nombreRazonSocial;
 	}
 
-	public String getTelefono() {
+	public int getTelefono() {
 		return this.telefono;
 	}
 
-	public void setTelefono(String telefono) {
+	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
 

@@ -1,45 +1,78 @@
-set sql_mode = "no_auto_value_on_zero";
-start transaction;
-set time_zone = "+00:00";
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 07-06-2020 a las 08:02:12
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.5
 
-/*!40101 set @old_character_set_client=@@character_set_client */;
-/*!40101 set @old_character_set_results=@@character_set_results */;
-/*!40101 set @old_collation_connection=@@collation_connection */;
-/*!40101 set names utf8mb4_unicode_ci */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-create database if not exists `mydb` default character set utf8mb4_unicode_ci collate utf8mb4_unicode_ci_general_ci;
-use `mydb`;
 
-drop table if exists `administrador`;
-create table `administrador` (
-  `fecha_entrada` date default null,
-  `fecha_salida` date default null,
-  `profesor_persona_id_persona` int(11) not null,
-  `contrasena` varchar(255) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-truncate table `administrador`;
-insert into `administrador` (`fecha_entrada`, `fecha_salida`, `profesor_persona_id_persona`, `contrasena`) values
+--
+-- Base de datos: `mydb`
+--
+CREATE DATABASE IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mydb`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `fecha_entrada` date DEFAULT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `profesor_persona_id_persona` int(11) NOT NULL,
+  `contrasena` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`fecha_entrada`, `fecha_salida`, `profesor_persona_id_persona`, `contrasena`) VALUES
 ('2020-05-12', '2020-05-21', 664, '87');
 
-drop table if exists `asistencia`;
-create table `asistencia` (
-  `idasistencia` int(11) not null,
-  `aprobado` tinyint(4) default null,
-  `fecha_registro` timestamp null default current_timestamp() on update current_timestamp(),
-  `visita_idvisita` int(11) not null,
-  `estudiante_persona_id_persona` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `asistencia`;
-drop table if exists `departamentos`;
-create table `departamentos` (
-  `id_departamento` int(2) unsigned not null,
-  `departamento` varchar(255) not null default ''
-) engine=innodb default charset=utf8mb4_unicode_ci;
+--
+-- Estructura de tabla para la tabla `asistencia`
+--
 
-truncate table `departamentos`;
-insert into `departamentos` (`id_departamento`, `departamento`) values
+CREATE TABLE `asistencia` (
+  `idasistencia` int(11) NOT NULL,
+  `aprobado` tinyint(4) DEFAULT NULL,
+  `fecha_registro` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `visita_idvisita` int(11) NOT NULL,
+  `estudiante_persona_id_persona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `id_departamento` int(2) UNSIGNED NOT NULL,
+  `departamento` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamento`, `departamento`) VALUES
 (5, 'antioquia'),
 (8, 'atlántico'),
 (11, 'bogotá, d.c.'),
@@ -74,159 +107,174 @@ insert into `departamentos` (`id_departamento`, `departamento`) values
 (97, 'vaupés'),
 (99, 'vichada');
 
-drop table if exists `documento_apoyo`;
-create table `documento_apoyo` (
-  `tipo_doc_apoyo_idtipo_doc_apoyo` int(11) not null,
-  `id_doc` int(11) not null,
-  `nombre` varchar(100) default null,
-  `direccion_url` varchar(300) default null,
-  `fecha_creacion` varchar(45) default null,
-  `visita_idvisita` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `documento_apoyo`;
+--
+-- Estructura de tabla para la tabla `documento_apoyo`
+--
 
-drop table if exists `genero`;
-create table `genero` (
-  `idgenero` int(11) not null,
-  `nombre` varchar(45) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+CREATE TABLE `documento_apoyo` (
+  `tipo_doc_apoyo_idtipo_doc_apoyo` int(11) NOT NULL,
+  `id_doc` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `direccion_url` varchar(300) DEFAULT NULL,
+  `fecha_creacion` varchar(45) DEFAULT NULL,
+  `visita_idvisita` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-truncate table `genero`;
-insert into `genero` (`idgenero`, `nombre`) values
-(1, 'masculino'),
-(2, 'femenino'),
-(3, 'otro');
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `empresa`
+--
 
-drop table if exists `tipo_id`;
-create table `tipo_id` (
-  `idtipo_id` int(11) not null,
-  `nombre` varchar(45) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+CREATE TABLE `empresa` (
+  `rut` int(11) NOT NULL,
+  `nombre_razon_social` varchar(45) DEFAULT NULL,
+  `telefono` int(12) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `representante_legal` int(11) NOT NULL,
+  `natural_juridica` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 para persona juridica',
+  `correo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-truncate table `tipo_id`;
-insert into `tipo_id` (`idtipo_id`, `nombre`) values
-(1, 'cedula de ciudadanía'),
-(2, 'tarjeta de identidad'),
-(3, 'cedula de extranjeria'),
-(4, 'pasaporte');
+--
+-- Volcado de datos para la tabla `empresa`
+--
 
-drop table if exists `persona`;
-create table `persona` (
-  `id_persona` int(11) not null,
-  `genero_idgenero` int(11) not null,
-  `tipo_id_idtipo_id` int(11) not null,
-  `nombre` varchar(45) not null,
-  `apellido1` varchar(45) not null,
-  `apellido2` varchar(45) not null,
-  `correo_contacto` varchar(45) not null,
-  `fecha_nacimiento` date default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+INSERT INTO `empresa` (`rut`, `nombre_razon_social`, `telefono`, `direccion`, `representante_legal`, `natural_juridica`, `correo`) VALUES
+(98, 'Postobon', 123, 'asd', 3, 0, 'correo@ejemplo.com'),
+(1111, 'modelaje del oriente', 1234, 'asdasd', 5, 0, ''),
+(122321, 'graficas y tablas .inc', 31237, 'direccion #1233', 2, 0, ''),
+(87012311, 'medios digitales sa', 1234, 'av 7 este', 9, 0, '');
 
-truncate table `persona`;
-insert into `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `nombre`, `apellido1`, `apellido2`, `correo_contacto`, `fecha_nacimiento`) values
-(1, 1, 1, 'jhonatan', 'a', 'b', 'claudia@ufps.edu.co', '2020-05-13'),
-(2, 1, 3, 'representante', 'representante', 'representante', 'correo@gmail.com', null),
-(5, 3, 1, 'representante', 'a', 'a', 'a', '2020-05-04'),
-(9, 1, 1, 'arturito', 'garrafla', 'gandia', 'correo@ufps.edu.co', '2020-05-13'),
-(12, 1, 1, 'felipe', 'seã±or', 'error', 'eduardojoasepc@ufps.edu.co', '2020-06-09'),
-(155, 1, 1, 'jhonatan ', 'cazares', 'de la villa', 'jhonatanraulca@ufps.edu.co', '2020-06-02'),
-(195, 1, 1, 'conejillo', 'de', 'indias', 'conejillo@ufps.edu.co', '1990-01-23'),
-(664, 1, 1, 'profesor1', 'profesorape', 'profesorape', 'eduardojosepc@ufps.edu.co', '2020-05-13'),
-(666, 2, 1, 'carmen', 'janeth', 'parada', 'correo', '2020-05-17'),
-(667, 3, 1, 'milton', 'prueba', 'prueba', 'motilon@ufps.edu.co', '2020-05-19'),
-(888, 2, 1, 'miguel', 'paez', 'avellaneda', 'migueleduardopa@ufps.edu.co', '2020-05-04'),
-(989, 1, 1, 'arturito padre', 'castor', 'fire', 'arturito@ufps.edu.co', '2020-05-06'),
-(98732, 3, 1, 'errro', 'errro', 'errro', 'eduardojosepc@ufps.edu.co', '2020-05-12'),
-(1114532, 1, 1, 'nicolas ', 'lkjasd', 'asdasd', 'prueba@ufps.edu.co', '1992-06-09'),
-(10909344, 1, 1, 'arturito junior', 'gargafa', 'gandia', 'arturito@ufps.edu.co', '2020-04-15'),
-(123444444, 1, 1, 'asad', 'asdad', 'asdasd', 'claudia@ufps.edu.co', '2020-05-04');
+-- --------------------------------------------------------
 
-drop table if exists `empresa`;
-create table `empresa` (
-  `rut` int(11) not null,
-  `nombre_razon_social` varchar(45) default null,
-  `telefono` varchar(45) default null,
-  `direccion` varchar(100) default null,
-  `representante_legal` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+--
+-- Estructura de tabla para la tabla `eps`
+--
 
-truncate table `empresa`;
-insert into `empresa` (`rut`, `nombre_razon_social`, `telefono`, `direccion`, `representante_legal`) values
-(1111, 'modelaje del oriente', '1234', 'asdasd', 5),
-(122321, 'graficas y tablas .inc', '3123777131', 'direccion #1233', 2),
-(87012311, 'medios digitales sa', '1234', 'av 7 este', 9);
+CREATE TABLE `eps` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-drop table if exists `eps`;
-create table `eps` (
-  `id` int(11) not null,
-  `nombre` varchar(255) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+--
+-- Volcado de datos para la tabla `eps`
+--
 
-truncate table `eps`;
-insert into `eps` (`id`, `nombre`) values
+INSERT INTO `eps` (`id`, `nombre`) VALUES
 (1, 'eps1'),
 (2, 'eps2'),
 (5, 'prueba');
 
-drop table if exists `estudiante`;
-create table `estudiante` (
-  `persona_id_persona` int(11) not null,
-  `codigo` varchar(45) not null,
-  `eps` int(11) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `estudiante`;
-insert into `estudiante` (`persona_id_persona`, `codigo`, `eps`) values
+--
+-- Estructura de tabla para la tabla `estudiante`
+--
+
+CREATE TABLE `estudiante` (
+  `persona_id_persona` int(11) NOT NULL,
+  `codigo` varchar(45) NOT NULL,
+  `eps` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`persona_id_persona`, `codigo`, `eps`) VALUES
 (1, '1151624', 5),
-(12, '887', null),
-(155, '1765', null),
-(98732, '4412', null),
+(12, '887', NULL),
+(155, '1765', NULL),
+(98732, '4412', NULL),
 (10909344, '999', 5),
-(123444444, '66', null);
+(123444444, '66', NULL);
 
-dr
+-- --------------------------------------------------------
 
-drop table if exists `grupo`;
-create table `grupo` (
-  `idgrupo` int(11) not null,
-  `materia_idmateria` int(11) not null,
-  `profesor_persona_id_persona` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+--
+-- Estructura de tabla para la tabla `genero`
+--
 
-truncate table `grupo`;
-insert into `grupo` (`idgrupo`, `materia_idmateria`, `profesor_persona_id_persona`) values
+CREATE TABLE `genero` (
+  `idgenero` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`idgenero`, `nombre`) VALUES
+(1, 'masculino'),
+(2, 'femenino'),
+(3, 'otro');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupo`
+--
+
+CREATE TABLE `grupo` (
+  `idgrupo` int(11) NOT NULL,
+  `materia_idmateria` int(11) NOT NULL,
+  `profesor_persona_id_persona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `grupo`
+--
+
+INSERT INTO `grupo` (`idgrupo`, `materia_idmateria`, `profesor_persona_id_persona`) VALUES
 (1, 123, 667),
 (2, 1234, 667),
 (778, 118, 664),
 (166677, 17123, 195),
 (13307031, 1330703, 664);
 
-drop table if exists `materia`;
-create table `materia` (
-  `idmateria` int(11) not null,
-  `nombre` varchar(45) default null,
-  `semestre_idsemestre` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `materia`;
-insert into `materia` (`idmateria`, `nombre`, `semestre_idsemestre`) values
+--
+-- Estructura de tabla para la tabla `materia`
+--
+
+CREATE TABLE `materia` (
+  `idmateria` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `semestre_idsemestre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`idmateria`, `nombre`, `semestre_idsemestre`) VALUES
 (118, 'sociedad y cultura', 5),
 (123, 'fotografia', 1),
 (1234, 'fotografia 2', 6),
 (17123, 'fabricación de mock-ups', 7),
 (1330703, 'estrategia de medios', 6);
 
-drop table if exists `municipios`;
-create table `municipios` (
-  `id_municipio` int(6) unsigned not null,
-  `municipio` varchar(255) not null default '',
-  `departamento_id` int(2) unsigned not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `municipios`;
-insert into `municipios` (`id_municipio`, `municipio`, `departamento_id`) values
+--
+-- Estructura de tabla para la tabla `municipios`
+--
+
+CREATE TABLE `municipios` (
+  `id_municipio` int(6) UNSIGNED NOT NULL,
+  `municipio` varchar(255) NOT NULL DEFAULT '',
+  `departamento_id` int(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `municipios`
+--
+
+INSERT INTO `municipios` (`id_municipio`, `municipio`, `departamento_id`) VALUES
 (1, 'abriaquí', 5),
 (2, 'acacías', 50),
 (3, 'acandí', 27),
@@ -1328,22 +1376,31 @@ insert into `municipios` (`id_municipio`, `municipio`, `departamento_id`) values
 (1099, 'úmbita', 15),
 (1100, 'útica', 25);
 
-drop table if exists `persona`;
-create table `persona` (
-  `id_persona` int(11) not null,
-  `genero_idgenero` int(11) not null,
-  `tipo_id_idtipo_id` int(11) not null,
-  `nombre` varchar(45) not null,
-  `apellido1` varchar(45) not null,
-  `apellido2` varchar(45) not null,
-  `correo_contacto` varchar(45) not null,
-  `fecha_nacimiento` date default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `persona`;
-insert into `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `nombre`, `apellido1`, `apellido2`, `correo_contacto`, `fecha_nacimiento`) values
+--
+-- Estructura de tabla para la tabla `persona`
+--
+
+CREATE TABLE `persona` (
+  `id_persona` int(11) NOT NULL,
+  `genero_idgenero` int(11) NOT NULL,
+  `tipo_id_idtipo_id` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido1` varchar(45) NOT NULL,
+  `apellido2` varchar(45) NOT NULL,
+  `correo_contacto` varchar(45) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `nombre`, `apellido1`, `apellido2`, `correo_contacto`, `fecha_nacimiento`) VALUES
 (1, 1, 1, 'jhonatan', 'a', 'b', 'claudia@ufps.edu.co', '2020-05-13'),
-(2, 1, 3, 'representante', 'representante', 'representante', 'correo@gmail.com', null),
+(2, 1, 3, 'representante', 'representante', 'representante', 'correo@gmail.com', NULL),
+(3, 1, 1, 'asd', 'asd', 'asd', NULL, NULL),
 (5, 3, 1, 'representante', 'a', 'a', 'a', '2020-05-04'),
 (9, 1, 1, 'arturito', 'garrafla', 'gandia', 'correo@ufps.edu.co', '2020-05-13'),
 (12, 1, 1, 'felipe', 'seã±or', 'error', 'eduardojoasepc@ufps.edu.co', '2020-06-09'),
@@ -1359,29 +1416,45 @@ insert into `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `no
 (10909344, 1, 1, 'arturito junior', 'gargafa', 'gandia', 'arturito@ufps.edu.co', '2020-04-15'),
 (123444444, 1, 1, 'asad', 'asdad', 'asdasd', 'claudia@ufps.edu.co', '2020-05-04');
 
-drop table if exists `profesor`;
-create table `profesor` (
-  `persona_id_persona` int(11) not null,
-  `codigo_profesor` varchar(45) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `profesor`;
-insert into `profesor` (`persona_id_persona`, `codigo_profesor`) values
+--
+-- Estructura de tabla para la tabla `profesor`
+--
+
+CREATE TABLE `profesor` (
+  `persona_id_persona` int(11) NOT NULL,
+  `codigo_profesor` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`persona_id_persona`, `codigo_profesor`) VALUES
 (888, '1117'),
 (667, '1181234'),
 (664, '119'),
 (195, '19881263'),
 (1114532, '98779');
 
-drop table if exists `semestre`;
-create table `semestre` (
-  `idsemestre` int(11) not null,
-  `periodo` varchar(45) default null,
-  `anio` varchar(45) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `semestre`;
-insert into `semestre` (`idsemestre`, `periodo`, `anio`) values
+--
+-- Estructura de tabla para la tabla `semestre`
+--
+
+CREATE TABLE `semestre` (
+  `idsemestre` int(11) NOT NULL,
+  `periodo` varchar(45) DEFAULT NULL,
+  `anio` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `semestre`
+--
+
+INSERT INTO `semestre` (`idsemestre`, `periodo`, `anio`) VALUES
 (1, 'i', '2020'),
 (2, 'ii', '2020'),
 (3, 'i', '2021'),
@@ -1390,15 +1463,23 @@ insert into `semestre` (`idsemestre`, `periodo`, `anio`) values
 (6, 'ii', '2022'),
 (7, '1', '2020');
 
-drop table if exists `tipo_doc_apoyo`;
-create table `tipo_doc_apoyo` (
-  `idtipo_doc_apoyo` int(11) not null,
-  `nombre` varchar(45) default null,
-  `descripcion` varchar(300) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `tipo_doc_apoyo`;
-insert into `tipo_doc_apoyo` (`idtipo_doc_apoyo`, `nombre`, `descripcion`) values
+--
+-- Estructura de tabla para la tabla `tipo_doc_apoyo`
+--
+
+CREATE TABLE `tipo_doc_apoyo` (
+  `idtipo_doc_apoyo` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_doc_apoyo`
+--
+
+INSERT INTO `tipo_doc_apoyo` (`idtipo_doc_apoyo`, `nombre`, `descripcion`) VALUES
 (0, 'documento de texto', 'archivos de texto de tipo .txt .docx .odt y similares'),
 (1, 'hojas de calculo', 'archivos de hojas de calculo de excel o similares'),
 (2, 'evidencias fotograficas', 'cualquier archivo de imagen de cualquier extensión y tipo que certifiquen aspectos necesarios de las visitas'),
@@ -1406,31 +1487,67 @@ insert into `tipo_doc_apoyo` (`idtipo_doc_apoyo`, `nombre`, `descripcion`) value
 (4, 'plantillas de presentaciones', 'editar info aqui_'),
 (5, 'archivos pdf', 'editar info aqui_');
 
+-- --------------------------------------------------------
 
-drop table if exists `tipo_usuario`;
-create table `tipo_usuario` (
-  `idtipo_usuario` int(11) not null,
-  `nombre` varchar(45) default null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+--
+-- Estructura de tabla para la tabla `tipo_id`
+--
 
-truncate table `tipo_usuario`;
-insert into `tipo_usuario` (`idtipo_usuario`, `nombre`) values
+CREATE TABLE `tipo_id` (
+  `idtipo_id` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_id`
+--
+
+INSERT INTO `tipo_id` (`idtipo_id`, `nombre`) VALUES
+(1, 'cedula de ciudadanía'),
+(2, 'tarjeta de identidad'),
+(3, 'cedula de extranjeria'),
+(4, 'pasaporte');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+
+CREATE TABLE `tipo_usuario` (
+  `idtipo_usuario` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`idtipo_usuario`, `nombre`) VALUES
 (0, 'estudiante'),
 (1, 'profesor'),
 (2, 'empresa'),
 (3, 'administrador');
 
-drop table if exists `usuario`;
-create table `usuario` (
-  `tipo_usuario_idtipo_usuario` int(11) not null,
-  `correo_usuario` varchar(45) default null,
-  `contrasena` varchar(255) default null,
-  `verificado` tinyint(4) default 0,
-  `id_usuario` int(11) not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `usuario`;
-insert into `usuario` (`tipo_usuario_idtipo_usuario`, `correo_usuario`, `contrasena`, `verificado`, `id_usuario`) values
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `tipo_usuario_idtipo_usuario` int(11) NOT NULL,
+  `correo_usuario` varchar(45) DEFAULT NULL,
+  `contrasena` varchar(255) DEFAULT NULL,
+  `verificado` tinyint(4) DEFAULT 0,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`tipo_usuario_idtipo_usuario`, `correo_usuario`, `contrasena`, `verificado`, `id_usuario`) VALUES
 (0, 'claaaaudia@ufps.edu.co', '87', 0, 1),
 (0, 'eduardojoasepc@ufps.edu.co', '87', 0, 12),
 (0, 'jhonatanraulca@ufps.edu.co', '87', 0, 155),
@@ -1443,174 +1560,307 @@ insert into `usuario` (`tipo_usuario_idtipo_usuario`, `correo_usuario`, `contras
 (0, 'arturito@ufps.edu.co', '87', 0, 10909344),
 (0, 'claudia@ufps.edu.co', '87', 0, 123444444);
 
-drop table if exists `visita`;
-create table `visita` (
-  `idvisita` int(11) not null,
-  `fecha_visita_inicio` date default null,
-  `grupo_idgrupo` int(11) not null,
-  `fecha_visita_salida` date default null,
-  `cupos_disponibles` int(11) default 0,
-  `municipio` int(6) unsigned not null,
-  `empresa_rut` int(11) not null,
-  `fecha_insercion` timestamp not null default current_timestamp() on update current_timestamp(),
-  `titulo` text not null,
-  `descripcion` text not null
-) engine=innodb default charset=utf8mb4_unicode_ci;
+-- --------------------------------------------------------
 
-truncate table `visita`;
-insert into `visita` (`idvisita`, `fecha_visita_inicio`, `grupo_idgrupo`, `fecha_visita_salida`, `cupos_disponibles`, `municipio`, `empresa_rut`, `fecha_insercion`, `titulo`, `descripcion`) values
-(39, '2020-06-02', 778, '2020-06-25', 100, 107, 87012311, '2020-06-04 22:10:09', 'practica de discurso receptivo', 'primera visita creada para practica de nidad 45 de materia '),
-(40, '2020-06-01', 13307031, '2020-06-18', 1, 107, 87012311, '2020-06-04 22:10:06', 'excursion insclusiva de medios digitales', 'descripcion bien bonita aqui'),
-(42, '2020-06-09', 1, '2020-06-11', 12, 107, 1111, '2020-06-04 22:13:05', 'prueba cucuta', 'preba');
+--
+-- Estructura de tabla para la tabla `visita`
+--
 
+CREATE TABLE `visita` (
+  `idvisita` int(11) NOT NULL,
+  `fecha_visita_inicio` date DEFAULT NULL,
+  `grupo_idgrupo` int(11) NOT NULL,
+  `fecha_visita_salida` date DEFAULT NULL,
+  `cupos_disponibles` int(11) DEFAULT 0,
+  `municipio` int(6) UNSIGNED NOT NULL,
+  `empresa_rut` int(11) NOT NULL,
+  `fecha_insercion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `titulo` text NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-alter table `administrador`
-  add primary key (`profesor_persona_id_persona`);
+--
+-- Volcado de datos para la tabla `visita`
+--
 
-alter table `asistencia`
-  add primary key (`idasistencia`),
-  add key `fk_asistencia_visita1_idx` (`visita_idvisita`),
-  add key `fk_asistencia_estudiante1_idx` (`estudiante_persona_id_persona`) using btree;
+INSERT INTO `visita` (`idvisita`, `fecha_visita_inicio`, `grupo_idgrupo`, `fecha_visita_salida`, `cupos_disponibles`, `municipio`, `empresa_rut`, `fecha_insercion`, `titulo`, `descripcion`) VALUES
+(40, '2020-06-01', 13307031, '2020-06-18', 1, 107, 87012311, '2020-06-04 22:10:06', 'excursion insclusiva de medios digitales', 'descripcion bien bonita aqui');
 
-alter table `departamentos`
-  add primary key (`id_departamento`);
+--
+-- Índices para tablas volcadas
+--
 
-alter table `documento_apoyo`
-  add primary key (`id_doc`),
-  add key `fk_documento_apoyo_tipo_doc_apoyo1_idx` (`tipo_doc_apoyo_idtipo_doc_apoyo`),
-  add key `fk_documento_apoyo_visita1_idx` (`visita_idvisita`);
+--
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`profesor_persona_id_persona`);
 
-alter table `empresa`
-  add primary key (`rut`),
-  add key `fk_empresa_persona1_idx` (`representante_legal`);
+--
+-- Indices de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  ADD PRIMARY KEY (`idasistencia`),
+  ADD KEY `fk_asistencia_visita1_idx` (`visita_idvisita`),
+  ADD KEY `fk_asistencia_estudiante1_idx` (`estudiante_persona_id_persona`) USING BTREE;
 
-alter table `eps`
-  add primary key (`id`);
+--
+-- Indices de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id_departamento`);
 
-alter table `estudiante`
-  add primary key (`persona_id_persona`),
-  add unique key `codigo_unique` (`codigo`),
-  add unique key `codigo` (`codigo`),
-  add key `eps` (`eps`);
+--
+-- Indices de la tabla `documento_apoyo`
+--
+ALTER TABLE `documento_apoyo`
+  ADD PRIMARY KEY (`id_doc`),
+  ADD KEY `fk_documento_apoyo_tipo_doc_apoyo1_idx` (`tipo_doc_apoyo_idtipo_doc_apoyo`),
+  ADD KEY `fk_documento_apoyo_visita1_idx` (`visita_idvisita`);
 
-alter table `genero`
-  add primary key (`idgenero`);
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`rut`),
+  ADD KEY `fk_empresa_persona1_idx` (`representante_legal`);
 
-alter table `grupo`
-  add primary key (`idgrupo`),
-  add key `fk_grupo_materia1_idx` (`materia_idmateria`),
-  add key `fk_grupo_profesor1_idx` (`profesor_persona_id_persona`);
+--
+-- Indices de la tabla `eps`
+--
+ALTER TABLE `eps`
+  ADD PRIMARY KEY (`id`);
 
-alter table `materia`
-  add primary key (`idmateria`),
-  add key `fk_materia_semestre1_idx` (`semestre_idsemestre`);
+--
+-- Indices de la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD PRIMARY KEY (`persona_id_persona`),
+  ADD UNIQUE KEY `codigo_unique` (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `eps` (`eps`);
 
-alter table `municipios`
-  add primary key (`id_municipio`),
-  add key `departamento_id` (`departamento_id`);
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`idgenero`);
 
-alter table `persona`
-  add primary key (`id_persona`),
-  add key `fk_persona_genero1_idx` (`genero_idgenero`),
-  add key `fk_persona_tipo_id1_idx` (`tipo_id_idtipo_id`);
+--
+-- Indices de la tabla `grupo`
+--
+ALTER TABLE `grupo`
+  ADD PRIMARY KEY (`idgrupo`),
+  ADD KEY `fk_grupo_materia1_idx` (`materia_idmateria`),
+  ADD KEY `fk_grupo_profesor1_idx` (`profesor_persona_id_persona`);
 
-alter table `profesor`
-  add primary key (`persona_id_persona`),
-  add unique key `codigo_profesor_unique` (`codigo_profesor`);
+--
+-- Indices de la tabla `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`idmateria`),
+  ADD KEY `fk_materia_semestre1_idx` (`semestre_idsemestre`);
 
-alter table `semestre`
-  add primary key (`idsemestre`);
+--
+-- Indices de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id_municipio`),
+  ADD KEY `departamento_id` (`departamento_id`);
 
-alter table `tipo_doc_apoyo`
-  add primary key (`idtipo_doc_apoyo`);
+--
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`id_persona`),
+  ADD KEY `fk_persona_genero1_idx` (`genero_idgenero`),
+  ADD KEY `fk_persona_tipo_id1_idx` (`tipo_id_idtipo_id`);
 
-alter table `tipo_id`
-  add primary key (`idtipo_id`);
+--
+-- Indices de la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD PRIMARY KEY (`persona_id_persona`),
+  ADD UNIQUE KEY `codigo_profesor_unique` (`codigo_profesor`);
 
-alter table `tipo_usuario`
-  add primary key (`idtipo_usuario`);
+--
+-- Indices de la tabla `semestre`
+--
+ALTER TABLE `semestre`
+  ADD PRIMARY KEY (`idsemestre`);
 
-alter table `usuario`
-  add primary key (`id_usuario`),
-  add key `fk_usuario_tipo_usuario1_idx` (`tipo_usuario_idtipo_usuario`),
-  add key `fk_usuario_persona1_idx` (`id_usuario`);
+--
+-- Indices de la tabla `tipo_doc_apoyo`
+--
+ALTER TABLE `tipo_doc_apoyo`
+  ADD PRIMARY KEY (`idtipo_doc_apoyo`);
 
-alter table `visita`
-  add primary key (`idvisita`),
-  add key `fk_visita_grupo1_idx` (`grupo_idgrupo`),
-  add key `m` (`municipio`),
-  add key `empresa_rut` (`empresa_rut`);
+--
+-- Indices de la tabla `tipo_id`
+--
+ALTER TABLE `tipo_id`
+  ADD PRIMARY KEY (`idtipo_id`);
 
+--
+-- Indices de la tabla `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`idtipo_usuario`);
 
-alter table `asistencia`
-  modify `idasistencia` int(11) not null auto_increment, auto_increment=28;
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `fk_usuario_tipo_usuario1_idx` (`tipo_usuario_idtipo_usuario`),
+  ADD KEY `fk_usuario_persona1_idx` (`id_usuario`);
 
-alter table `departamentos`
-  modify `id_departamento` int(2) unsigned not null auto_increment, auto_increment=100;
+--
+-- Indices de la tabla `visita`
+--
+ALTER TABLE `visita`
+  ADD PRIMARY KEY (`idvisita`),
+  ADD KEY `fk_visita_grupo1_idx` (`grupo_idgrupo`),
+  ADD KEY `m` (`municipio`),
+  ADD KEY `empresa_rut` (`empresa_rut`);
 
-alter table `documento_apoyo`
-  modify `id_doc` int(11) not null auto_increment;
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
 
-alter table `genero`
-  modify `idgenero` int(11) not null auto_increment, auto_increment=10;
+--
+-- AUTO_INCREMENT de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  MODIFY `idasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
-alter table `municipios`
-  modify `id_municipio` int(6) unsigned not null auto_increment, auto_increment=1101;
+--
+-- AUTO_INCREMENT de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id_departamento` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
-alter table `semestre`
-  modify `idsemestre` int(11) not null auto_increment, auto_increment=8;
+--
+-- AUTO_INCREMENT de la tabla `documento_apoyo`
+--
+ALTER TABLE `documento_apoyo`
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT;
 
-alter table `tipo_id`
-  modify `idtipo_id` int(11) not null auto_increment, auto_increment=5;
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `idgenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
-alter table `visita`
-  modify `idvisita` int(11) not null auto_increment, auto_increment=43;
+--
+-- AUTO_INCREMENT de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id_municipio` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1101;
 
+--
+-- AUTO_INCREMENT de la tabla `semestre`
+--
+ALTER TABLE `semestre`
+  MODIFY `idsemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
-alter table `administrador`
-  add constraint `fk_administrador_profesor1` foreign key (`profesor_persona_id_persona`) references `profesor` (`persona_id_persona`) on delete cascade on update no action;
+--
+-- AUTO_INCREMENT de la tabla `tipo_id`
+--
+ALTER TABLE `tipo_id`
+  MODIFY `idtipo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
-alter table `asistencia`
-  add constraint `fk_asistencia_estudiante1` foreign key (`estudiante_persona_id_persona`) references `estudiante` (`persona_id_persona`) on delete no action on update no action,
-  add constraint `fk_asistencia_visita1` foreign key (`visita_idvisita`) references `visita` (`idvisita`) on delete cascade on update cascade;
+--
+-- AUTO_INCREMENT de la tabla `visita`
+--
+ALTER TABLE `visita`
+  MODIFY `idvisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
-alter table `documento_apoyo`
-  add constraint `fk_documento_apoyo_tipo_doc_apoyo1` foreign key (`tipo_doc_apoyo_idtipo_doc_apoyo`) references `tipo_doc_apoyo` (`idtipo_doc_apoyo`) on delete no action on update no action,
-  add constraint `fk_documento_apoyo_visita1` foreign key (`visita_idvisita`) references `visita` (`idvisita`) on delete no action on update no action;
+--
+-- Restricciones para tablas volcadas
+--
 
-alter table `empresa`
-  add constraint `fk_empresa_persona1` foreign key (`representante_legal`) references `persona` (`id_persona`) on delete no action on update no action;
+--
+-- Filtros para la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD CONSTRAINT `fk_administrador_profesor1` FOREIGN KEY (`profesor_persona_id_persona`) REFERENCES `profesor` (`persona_id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
-alter table `estudiante`
-  add constraint `eps` foreign key (`eps`) references `eps` (`id`),
-  add constraint `fk_estudiante_persona1` foreign key (`persona_id_persona`) references `persona` (`id_persona`) on delete cascade on update no action;
+--
+-- Filtros para la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  ADD CONSTRAINT `fk_asistencia_estudiante1` FOREIGN KEY (`estudiante_persona_id_persona`) REFERENCES `estudiante` (`persona_id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_asistencia_visita1` FOREIGN KEY (`visita_idvisita`) REFERENCES `visita` (`idvisita`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-alter table `grupo`
-  add constraint `fk_grupo_materia1` foreign key (`materia_idmateria`) references `materia` (`idmateria`) on delete no action on update no action,
-  add constraint `fk_grupo_profesor1` foreign key (`profesor_persona_id_persona`) references `profesor` (`persona_id_persona`) on delete cascade on update no action;
+--
+-- Filtros para la tabla `documento_apoyo`
+--
+ALTER TABLE `documento_apoyo`
+  ADD CONSTRAINT `fk_documento_apoyo_tipo_doc_apoyo1` FOREIGN KEY (`tipo_doc_apoyo_idtipo_doc_apoyo`) REFERENCES `tipo_doc_apoyo` (`idtipo_doc_apoyo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_documento_apoyo_visita1` FOREIGN KEY (`visita_idvisita`) REFERENCES `visita` (`idvisita`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-alter table `materia`
-  add constraint `fk_materia_semestre1` foreign key (`semestre_idsemestre`) references `semestre` (`idsemestre`) on delete no action on update no action;
+--
+-- Filtros para la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD CONSTRAINT `fk_empresa_persona1` FOREIGN KEY (`representante_legal`) REFERENCES `persona` (`id_persona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-alter table `municipios`
-  add constraint `departamento_fk` foreign key (`departamento_id`) references `departamentos` (`id_departamento`) on delete cascade;
+--
+-- Filtros para la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD CONSTRAINT `eps` FOREIGN KEY (`eps`) REFERENCES `eps` (`id`),
+  ADD CONSTRAINT `fk_estudiante_persona1` FOREIGN KEY (`persona_id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
-alter table `persona`
-  add constraint `fk_persona_genero1` foreign key (`genero_idgenero`) references `genero` (`idgenero`) on delete no action on update no action,
-  add constraint `fk_persona_tipo_id1` foreign key (`tipo_id_idtipo_id`) references `tipo_id` (`idtipo_id`) on delete no action on update no action;
+--
+-- Filtros para la tabla `grupo`
+--
+ALTER TABLE `grupo`
+  ADD CONSTRAINT `fk_grupo_materia1` FOREIGN KEY (`materia_idmateria`) REFERENCES `materia` (`idmateria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_grupo_profesor1` FOREIGN KEY (`profesor_persona_id_persona`) REFERENCES `profesor` (`persona_id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
-alter table `profesor`
-  add constraint `fk_profesor_persona1` foreign key (`persona_id_persona`) references `persona` (`id_persona`) on delete cascade on update no action;
+--
+-- Filtros para la tabla `materia`
+--
+ALTER TABLE `materia`
+  ADD CONSTRAINT `fk_materia_semestre1` FOREIGN KEY (`semestre_idsemestre`) REFERENCES `semestre` (`idsemestre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-alter table `usuario`
-  add constraint `fk_usuario_tipo_usuario1` foreign key (`tipo_usuario_idtipo_usuario`) references `tipo_usuario` (`idtipo_usuario`) on delete no action on update no action,
-  add constraint `fk_usuario_persona1` foreign key (`id_usuario`) references `persona` (`id_persona`) on delete cascade on update no action;
+--
+-- Filtros para la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD CONSTRAINT `departamento_fk` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id_departamento`) ON DELETE CASCADE;
 
-alter table `visita`
-  add constraint `empresa_rut` foreign key (`empresa_rut`) references `empresa` (`rut`),
-  add constraint `fk_visita_grupo1` foreign key (`grupo_idgrupo`) references `grupo` (`idgrupo`) on delete no action on update no action,
-  add constraint `m` foreign key (`municipio`) references `municipios` (`id_municipio`);
-commit;
+--
+-- Filtros para la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD CONSTRAINT `fk_persona_genero1` FOREIGN KEY (`genero_idgenero`) REFERENCES `genero` (`idgenero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_persona_tipo_id1` FOREIGN KEY (`tipo_id_idtipo_id`) REFERENCES `tipo_id` (`idtipo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-/*!40101 set character_set_client=@old_character_set_client */;
-/*!40101 set character_set_results=@old_character_set_results */;
+--
+-- Filtros para la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD CONSTRAINT `fk_profesor_persona1` FOREIGN KEY (`persona_id_persona`) REFERENCES `persona` (`id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `fk_usuario_persona1` FOREIGN KEY (`id_usuario`) REFERENCES `persona` (`id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_tipo_usuario1` FOREIGN KEY (`tipo_usuario_idtipo_usuario`) REFERENCES `tipo_usuario` (`idtipo_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `visita`
+--
+ALTER TABLE `visita`
+  ADD CONSTRAINT `empresa_rut` FOREIGN KEY (`empresa_rut`) REFERENCES `empresa` (`rut`),
+  ADD CONSTRAINT `fk_visita_grupo1` FOREIGN KEY (`grupo_idgrupo`) REFERENCES `grupo` (`idgrupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `m` FOREIGN KEY (`municipio`) REFERENCES `municipios` (`id_municipio`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

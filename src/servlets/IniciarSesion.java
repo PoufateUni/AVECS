@@ -80,7 +80,7 @@ public class IniciarSesion extends HttpServlet {
 		TipoUsuario tu= new TipoUsuario();
 		String pass=request.getParameter("pass");
 		int tipoUsuario=Integer.parseInt( request.getParameter("tipoUsuario"));
-		System.out.print("tipo de usuario="+tipoUsuario);
+		
 		int id= Integer.parseInt( request.getParameter("id"));
 		int tipoUsuarioBusqueda=tipoUsuario;
 		if(tipoUsuario==3)tipoUsuarioBusqueda=1;

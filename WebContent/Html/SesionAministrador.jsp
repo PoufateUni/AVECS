@@ -29,7 +29,7 @@ SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     <div class="container">
         <nav class="row">
             <ul class="menu">
-                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-10"></div>
+                <div class="col-xs-8 col-sm-8 col-md-9 col-lg-10"><a onclick="history.back()">VOLVER</a></div>
                <li class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><form method="get" action="/avecs/IniciarSesion"><button type="submit">salir</button></form></li>
             </ul>
         </nav>
@@ -38,10 +38,10 @@ SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     <div class="container">
         <div class="row">
-            <a href="RegistrarVisita" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Visita</a>
-            <a href="#" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Empresa</a>
-             <a href="#" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Grupo</a>
-             <a href="#" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Materia</a>
+            <a href="${pageContext.request.contextPath}/Html/RegistrarVisita" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Visita</a>
+            <a href="${pageContext.request.contextPath}/Html/RegistrarEmpresa.jsp" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Empresa</a>
+             <a href="${pageContext.request.contextPath}/Html/RegistrarGrupo" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Grupo</a>
+             <a href="${pageContext.request.contextPath}/Html/RegistrarMateria" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Materia</a>
               <a href="#" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Listado Estudiantes Inscritos para verificar</a>
             <button class="btn btn-danger col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin: 0 10px;">Subir Listado de estudiantes</button>
               
