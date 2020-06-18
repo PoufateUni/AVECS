@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
      <%@page import="java.util.List"%>
     <%@page import="entidades.Grupo"%>
     <%@page import="entidades.Empresa"%>
@@ -146,6 +146,10 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");%>
             <div class="form-group container input-group" style="width: 50%">
                 <label>Cupo Maximo</label>
                 <input class="form-control" name="cupos" type="number" required placeholder="número de cupos maximos Anteriores: ${requestScope.cupos}" />
+            </div>
+              <div class="form-group container input-group" style="width: 50%">
+                <label>Cupo Maximo de estudiantes que pueden ser aprobados</label>
+                <input class="form-control" name="cupos2" type="number" required placeholder="numero de cupos maximos aprobados anteriores: ${requestScope.cupos2}" />
             </div>
            
 

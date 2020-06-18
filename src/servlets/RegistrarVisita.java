@@ -136,6 +136,7 @@ public class RegistrarVisita extends HttpServlet {
 		 visita.setDescripcion((request.getParameter("descripcion")));
 		 visita.setMunicipio(md.find(municipio));
 		 visita.setCuposDisponibles(Integer.parseInt(request.getParameter("cupos")));
+		 visita.setCuposAprobadosDisponibles(Integer.parseInt(request.getParameter("cupos2")));
 		 System.out.println("activo"+Conexion.getEm().getTransaction().isActive());
 		 Conexion.getEm().clear();
 		 visitaDao.insert(visita);

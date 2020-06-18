@@ -138,6 +138,9 @@ private Persona crearPersonaSimple(int id, TipoId tipoId, String nombres, String
 						 Estudiante es= new Estudiante();
 						 EstudianteDao esd= new EstudianteDao();
 						 es.setEps(epsDao.find(idEps));
+						
+						
+						 
 						 es.setCodigo(request.getParameter("codigo"));
 						 es.setPersona(pd.find(idP));
 						 es.setPersona_id_Persona(idP);

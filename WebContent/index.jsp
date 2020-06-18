@@ -144,6 +144,7 @@ SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             </div>
             </section>
         </div>
+        <a href="BusquedaVisitas">Busqueda avanzada</a>
     </div>
     
 

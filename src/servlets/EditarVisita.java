@@ -70,6 +70,7 @@ public class EditarVisita extends HttpServlet {
 				request.setAttribute("fechaIn",v.getFechaVisitaInicio().toString());
 				request.setAttribute("fechaFinal", v.getFechaVisitaSalida().toString());
 				request.setAttribute("cupos",v.getCuposDisponibles());
+				request.setAttribute("cupos2",v.getCuposAprobadosDisponibles());
 				request.setAttribute("empresaId",v.getEmpresa().getRut());
 				request.setAttribute("titulo", v.getTitulo());
 				request.setAttribute("descripcion", v.getDescripcion());
@@ -124,6 +125,7 @@ public class EditarVisita extends HttpServlet {
 	    v.setTitulo(request.getParameter("titulo"));
 	    v.setDescripcion(request.getParameter("descripcion"));
 	    v.setCuposDisponibles(Integer.parseInt(request.getParameter("cupos")));
+	    v.setCuposAprobadosDisponibles(Integer.parseInt(request.getParameter("cupos2")));
 
 	    v.setEmpresa(empresaDao.find((Integer.parseInt(request.getParameter("empresa")))));
 	    Date fechaIn  = new Date();

@@ -15,26 +15,27 @@ public class DocumentoApoyo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_doc")
 	private int idDoc;
 
 	@Column(name="direccion_url")
 	private String direccionUrl;
 
-	@Column(name="fecha_creacion")
-	private String fechaCreacion;
 
 	private String nombre;
-
+	@Column(name="externo")
+	private int externo;
+	
 	//uni-directional many-to-one association to TipoDocApoyo
 	@ManyToOne
 	@JoinColumn(name="Tipo_doc_Apoyo_idTipo_doc_Apoyo")
 	private TipoDocApoyo tipoDocApoyo;
 
-	//bi-directional many-to-one association to Visita
+	//bi-directional many-to-one association to Empresa
 	@ManyToOne
-	@JoinColumn(name="Visita_idVisita")
-	private Visita visita;
+	@JoinColumn(name="empresa_nit")
+	private Empresa empresa;
 
 	public DocumentoApoyo() {
 	}
@@ -47,6 +48,14 @@ public class DocumentoApoyo implements Serializable {
 		this.idDoc = idDoc;
 	}
 
+	public int getExterno() {
+		return externo;
+	}
+
+	public void setExterno(int externo) {
+		this.externo = externo;
+	}
+
 	public String getDireccionUrl() {
 		return this.direccionUrl;
 	}
@@ -55,13 +64,7 @@ public class DocumentoApoyo implements Serializable {
 		this.direccionUrl = direccionUrl;
 	}
 
-	public String getFechaCreacion() {
-		return this.fechaCreacion;
-	}
-
-	public void setFechaCreacion(String fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
+	
 
 	public String getNombre() {
 		return this.nombre;
@@ -79,12 +82,12 @@ public class DocumentoApoyo implements Serializable {
 		this.tipoDocApoyo = tipoDocApoyo;
 	}
 
-	public Visita getVisita() {
-		return this.visita;
+	public Empresa getEmpresa() {
+		return this.empresa;
 	}
 
-	public void setVisita(Visita visita) {
-		this.visita = visita;
+	public void setEmpresa(Empresa visita) {
+		this.empresa = visita;
 	}
 
 }

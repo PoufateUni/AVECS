@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 07-06-2020 a las 08:02:12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 18-06-2020 a las 06:25:52
 -- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,10 +117,21 @@ CREATE TABLE `documento_apoyo` (
   `tipo_doc_apoyo_idtipo_doc_apoyo` int(11) NOT NULL,
   `id_doc` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
-  `direccion_url` varchar(300) DEFAULT NULL,
-  `fecha_creacion` varchar(45) DEFAULT NULL,
-  `visita_idvisita` int(11) NOT NULL
+  `fecha_creacion` timestamp NULL DEFAULT current_timestamp(),
+  `empresa_nit` int(11) NOT NULL,
+  `externo` tinyint(1) NOT NULL,
+  `direccion_url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `documento_apoyo`
+--
+
+INSERT INTO `documento_apoyo` (`tipo_doc_apoyo_idtipo_doc_apoyo`, `id_doc`, `nombre`, `fecha_creacion`, `empresa_nit`, `externo`, `direccion_url`) VALUES
+(0, 1, 'nombre', '2020-06-17 21:18:37', 98, 0, 'c:\\data\\hs_err_pid23196.log'),
+(0, 4, 'prueba 3', '2020-06-17 23:41:07', 98, 0, 'c:\\data\\ayd.sql'),
+(0, 9, 'lijasd', '2020-06-18 00:17:58', 98, 0, 'c:\\data\\.project'),
+(4, 12, 'prueba de texto plano', '2020-06-18 03:33:47', 1111, 0, 'c:\\data\\RELEASE-NOTES.txt');
 
 -- --------------------------------------------------------
 
@@ -221,19 +232,23 @@ INSERT INTO `genero` (`idgenero`, `nombre`) VALUES
 CREATE TABLE `grupo` (
   `idgrupo` int(11) NOT NULL,
   `materia_idmateria` int(11) NOT NULL,
-  `profesor_persona_id_persona` int(11) NOT NULL
+  `profesor_persona_id_persona` int(11) NOT NULL,
+  `periodo` int(1) NOT NULL,
+  `anio` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `grupo`
 --
 
-INSERT INTO `grupo` (`idgrupo`, `materia_idmateria`, `profesor_persona_id_persona`) VALUES
-(1, 123, 667),
-(2, 1234, 667),
-(778, 118, 664),
-(166677, 17123, 195),
-(13307031, 1330703, 664);
+INSERT INTO `grupo` (`idgrupo`, `materia_idmateria`, `profesor_persona_id_persona`, `periodo`, `anio`) VALUES
+(1, 123, 667, 0, 0),
+(2, 1234, 667, 0, 0),
+(3, 2, 1114532, 2, 2020),
+(778, 118, 664, 0, 0),
+(65433, 118, 888, 1, 2020),
+(166677, 17123, 195, 0, 0),
+(13307031, 1330703, 664, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -244,14 +259,16 @@ INSERT INTO `grupo` (`idgrupo`, `materia_idmateria`, `profesor_persona_id_person
 CREATE TABLE `materia` (
   `idmateria` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
-  `semestre_idsemestre` int(11) NOT NULL
+  `semestre` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`idmateria`, `nombre`, `semestre_idsemestre`) VALUES
+INSERT INTO `materia` (`idmateria`, `nombre`, `semestre`) VALUES
+(1, 'as', 8),
+(2, 'vocalizacion', 9),
 (118, 'sociedad y cultura', 5),
 (123, 'fotografia', 1),
 (1234, 'fotografia 2', 6),
@@ -1403,7 +1420,7 @@ INSERT INTO `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `no
 (3, 1, 1, 'asd', 'asd', 'asd', NULL, NULL),
 (5, 3, 1, 'representante', 'a', 'a', 'a', '2020-05-04'),
 (9, 1, 1, 'arturito', 'garrafla', 'gandia', 'correo@ufps.edu.co', '2020-05-13'),
-(12, 1, 1, 'felipe', 'seã±or', 'error', 'eduardojoasepc@ufps.edu.co', '2020-06-09'),
+(12, 1, 1, 'felipe', 'seã±or', 'error', 'eduardojoasepc@ufps.ede', '2020-06-09'),
 (155, 1, 1, 'jhonatan ', 'cazares', 'de la villa', 'jhonatanraulca@ufps.edu.co', '2020-06-02'),
 (195, 1, 1, 'conejillo', 'de', 'indias', 'conejillo@ufps.edu.co', '1990-01-23'),
 (664, 1, 1, 'profesor1', 'profesorape', 'profesorape', 'eduardojosepc@ufps.edu.co', '2020-05-13'),
@@ -1411,7 +1428,7 @@ INSERT INTO `persona` (`id_persona`, `genero_idgenero`, `tipo_id_idtipo_id`, `no
 (667, 3, 1, 'milton', 'prueba', 'prueba', 'motilon@ufps.edu.co', '2020-05-19'),
 (888, 2, 1, 'miguel', 'paez', 'avellaneda', 'migueleduardopa@ufps.edu.co', '2020-05-04'),
 (989, 1, 1, 'arturito padre', 'castor', 'fire', 'arturito@ufps.edu.co', '2020-05-06'),
-(98732, 3, 1, 'errro', 'errro', 'errro', 'eduardojosepc@ufps.edu.co', '2020-05-12'),
+(98732, 3, 1, 'errro', 'errro', 'errro', 'error', '2020-05-12'),
 (1114532, 1, 1, 'nicolas ', 'lkjasd', 'asdasd', 'prueba@ufps.edu.co', '1992-06-09'),
 (10909344, 1, 1, 'arturito junior', 'gargafa', 'gandia', 'arturito@ufps.edu.co', '2020-04-15'),
 (123444444, 1, 1, 'asad', 'asdad', 'asdasd', 'claudia@ufps.edu.co', '2020-05-04');
@@ -1441,31 +1458,6 @@ INSERT INTO `profesor` (`persona_id_persona`, `codigo_profesor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `semestre`
---
-
-CREATE TABLE `semestre` (
-  `idsemestre` int(11) NOT NULL,
-  `periodo` varchar(45) DEFAULT NULL,
-  `anio` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `semestre`
---
-
-INSERT INTO `semestre` (`idsemestre`, `periodo`, `anio`) VALUES
-(1, 'i', '2020'),
-(2, 'ii', '2020'),
-(3, 'i', '2021'),
-(4, 'ii', '2021'),
-(5, 'i', '2022'),
-(6, 'ii', '2022'),
-(7, '1', '2020');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tipo_doc_apoyo`
 --
 
@@ -1480,12 +1472,10 @@ CREATE TABLE `tipo_doc_apoyo` (
 --
 
 INSERT INTO `tipo_doc_apoyo` (`idtipo_doc_apoyo`, `nombre`, `descripcion`) VALUES
-(0, 'documento de texto', 'archivos de texto de tipo .txt .docx .odt y similares'),
-(1, 'hojas de calculo', 'archivos de hojas de calculo de excel o similares'),
-(2, 'evidencias fotograficas', 'cualquier archivo de imagen de cualquier extensión y tipo que certifiquen aspectos necesarios de las visitas'),
-(3, 'video', 'archivos de video y etc...'),
-(4, 'plantillas de presentaciones', 'editar info aqui_'),
-(5, 'archivos pdf', 'editar info aqui_');
+(0, 'application/pdf', 'archivos pdf'),
+(1, 'image/jpg', 'imagenes, logotipos y etc'),
+(2, 'text/html', 'texto en formato html'),
+(4, 'text/plain', 'texto plano en formato .txt');
 
 -- --------------------------------------------------------
 
@@ -1524,7 +1514,7 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`idtipo_usuario`, `nombre`) VALUES
-(0, 'estudiante'),
+(0, 'Estudiante'),
 (1, 'profesor'),
 (2, 'empresa'),
 (3, 'administrador');
@@ -1572,6 +1562,7 @@ CREATE TABLE `visita` (
   `grupo_idgrupo` int(11) NOT NULL,
   `fecha_visita_salida` date DEFAULT NULL,
   `cupos_disponibles` int(11) DEFAULT 0,
+  `cuposAprobadosDisponibles` int(11) NOT NULL DEFAULT 0,
   `municipio` int(6) UNSIGNED NOT NULL,
   `empresa_rut` int(11) NOT NULL,
   `fecha_insercion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -1583,8 +1574,21 @@ CREATE TABLE `visita` (
 -- Volcado de datos para la tabla `visita`
 --
 
-INSERT INTO `visita` (`idvisita`, `fecha_visita_inicio`, `grupo_idgrupo`, `fecha_visita_salida`, `cupos_disponibles`, `municipio`, `empresa_rut`, `fecha_insercion`, `titulo`, `descripcion`) VALUES
-(40, '2020-06-01', 13307031, '2020-06-18', 1, 107, 87012311, '2020-06-04 22:10:06', 'excursion insclusiva de medios digitales', 'descripcion bien bonita aqui');
+INSERT INTO `visita` (`idvisita`, `fecha_visita_inicio`, `grupo_idgrupo`, `fecha_visita_salida`, `cupos_disponibles`, `cuposAprobadosDisponibles`, `municipio`, `empresa_rut`, `fecha_insercion`, `titulo`, `descripcion`) VALUES
+(57, '2020-07-02', 1, '2020-07-11', 123, 0, 529, 98, '2020-06-09 02:43:42', 'asd', 'asd'),
+(60, '2020-07-02', 1, '2020-07-11', 123, 0, 107, 98, '2020-06-09 02:44:26', 'asd', 'asd'),
+(61, '2020-07-02', 1, '2020-07-11', 123, 0, 107, 98, '2020-06-09 02:47:24', 'asd', 'asd'),
+(63, '2020-06-03', 1, '2020-06-18', 12, 0, 107, 1111, '2020-06-10 06:10:18', 'viaje ', 'asdasd'),
+(64, '2020-06-09', 1, '2020-06-26', 12, 0, 107, 1111, '2020-06-10 06:10:31', 'viaje ', 'asdasd'),
+(65, '2020-06-06', 1, '2020-06-27', 12, 0, 107, 1111, '2020-06-10 06:10:38', 'viaje ', 'asdasd'),
+(66, '2020-06-02', 1, '2020-06-03', 12, 0, 107, 1111, '2020-06-10 06:10:44', 'viaje ', 'asdasd'),
+(67, '2020-06-29', 1, '2020-06-30', 12, 0, 107, 1111, '2020-06-10 06:10:51', 'viaje ', 'asdasd'),
+(68, '2020-06-01', 1, '2020-06-19', 12, 0, 107, 1111, '2020-06-10 06:10:58', 'viaje ', 'asdasd'),
+(69, '2020-06-01', 1, '2020-06-19', 12, 0, 107, 98, '2020-06-10 06:11:05', 'viaje ', 'asdasd'),
+(70, '2020-06-01', 1, '2020-06-19', 12, 0, 107, 122321, '2020-06-10 06:11:14', 'viaje ', 'asdasd'),
+(71, '2020-06-24', 1, '2020-06-27', 12, 0, 107, 122321, '2020-06-10 06:11:23', 'viaje ', 'asdasd'),
+(72, '2020-06-01', 1, '2020-06-03', 12, 0, 107, 122321, '2020-06-10 06:11:29', 'viaje ', 'asdasd'),
+(76, '2020-05-12', 1, '2020-05-20', 100, 1, 24, 122321, '2020-06-18 04:16:38', 'prueba de cupos', 'asdasd');
 
 --
 -- Índices para tablas volcadas
@@ -1616,7 +1620,7 @@ ALTER TABLE `departamentos`
 ALTER TABLE `documento_apoyo`
   ADD PRIMARY KEY (`id_doc`),
   ADD KEY `fk_documento_apoyo_tipo_doc_apoyo1_idx` (`tipo_doc_apoyo_idtipo_doc_apoyo`),
-  ADD KEY `fk_documento_apoyo_visita1_idx` (`visita_idvisita`);
+  ADD KEY `empresa_nit` (`empresa_nit`);
 
 --
 -- Indices de la tabla `empresa`
@@ -1658,8 +1662,7 @@ ALTER TABLE `grupo`
 -- Indices de la tabla `materia`
 --
 ALTER TABLE `materia`
-  ADD PRIMARY KEY (`idmateria`),
-  ADD KEY `fk_materia_semestre1_idx` (`semestre_idsemestre`);
+  ADD PRIMARY KEY (`idmateria`);
 
 --
 -- Indices de la tabla `municipios`
@@ -1682,12 +1685,6 @@ ALTER TABLE `persona`
 ALTER TABLE `profesor`
   ADD PRIMARY KEY (`persona_id_persona`),
   ADD UNIQUE KEY `codigo_profesor_unique` (`codigo_profesor`);
-
---
--- Indices de la tabla `semestre`
---
-ALTER TABLE `semestre`
-  ADD PRIMARY KEY (`idsemestre`);
 
 --
 -- Indices de la tabla `tipo_doc_apoyo`
@@ -1732,7 +1729,7 @@ ALTER TABLE `visita`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `idasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -1744,7 +1741,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `documento_apoyo`
 --
 ALTER TABLE `documento_apoyo`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -1759,12 +1756,6 @@ ALTER TABLE `municipios`
   MODIFY `id_municipio` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1101;
 
 --
--- AUTO_INCREMENT de la tabla `semestre`
---
-ALTER TABLE `semestre`
-  MODIFY `idsemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT de la tabla `tipo_id`
 --
 ALTER TABLE `tipo_id`
@@ -1774,7 +1765,7 @@ ALTER TABLE `tipo_id`
 -- AUTO_INCREMENT de la tabla `visita`
 --
 ALTER TABLE `visita`
-  MODIFY `idvisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idvisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- Restricciones para tablas volcadas
@@ -1797,8 +1788,8 @@ ALTER TABLE `asistencia`
 -- Filtros para la tabla `documento_apoyo`
 --
 ALTER TABLE `documento_apoyo`
-  ADD CONSTRAINT `fk_documento_apoyo_tipo_doc_apoyo1` FOREIGN KEY (`tipo_doc_apoyo_idtipo_doc_apoyo`) REFERENCES `tipo_doc_apoyo` (`idtipo_doc_apoyo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_documento_apoyo_visita1` FOREIGN KEY (`visita_idvisita`) REFERENCES `visita` (`idvisita`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `empresa_nit_fk` FOREIGN KEY (`empresa_nit`) REFERENCES `empresa` (`rut`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_documento_apoyo_tipo_doc_apoyo1` FOREIGN KEY (`tipo_doc_apoyo_idtipo_doc_apoyo`) REFERENCES `tipo_doc_apoyo` (`idtipo_doc_apoyo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `empresa`
@@ -1819,12 +1810,6 @@ ALTER TABLE `estudiante`
 ALTER TABLE `grupo`
   ADD CONSTRAINT `fk_grupo_materia1` FOREIGN KEY (`materia_idmateria`) REFERENCES `materia` (`idmateria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_grupo_profesor1` FOREIGN KEY (`profesor_persona_id_persona`) REFERENCES `profesor` (`persona_id_persona`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `materia`
---
-ALTER TABLE `materia`
-  ADD CONSTRAINT `fk_materia_semestre1` FOREIGN KEY (`semestre_idsemestre`) REFERENCES `semestre` (`idsemestre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `municipios`

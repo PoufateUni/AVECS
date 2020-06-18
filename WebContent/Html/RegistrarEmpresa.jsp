@@ -62,7 +62,7 @@
             <div class="form-group container input-group" style="width: 60%"></div>
             <div class="form-group container input-group" style="width: 60%"></div>
             <div class="form-group container input-group" style="width: 60%">
-                <label>Datos representante legal</label>
+                <label>Datos de Contacto</label>
                 <p>_______________________________</p>
             </div>
 

@@ -152,8 +152,12 @@ List<Empresa> listaEmpresa =(List)request.getAttribute("listaEmpresas");
                 <input class="form-control" name="fechaFin"type="date"/>
             </div>
             <div class="form-group container input-group" style="width: 50%">
-                <label>Cupo Maximo</label>
+                <label>Cupo Maximo de estudiantes que pueden inscribirse</label>
                 <input class="form-control" name="cupos" type="number" required placeholder="numero de cupos maximos" />
+            </div>
+            <div class="form-group container input-group" style="width: 50%">
+                <label>Cupo Maximo de estudiantes que pueden ser aprobados</label>
+                <input class="form-control" name="cupos2" type="number" required placeholder="numero de cupos maximos" />
             </div>
            
 

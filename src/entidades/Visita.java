@@ -26,6 +26,8 @@ public class Visita implements Serializable {
 	@Column(name="cupos_disponibles")
 	private int cuposDisponibles;
 
+	@Column(name="cuposAprobadosDisponibles")
+	private int cuposAprobadosDisponibles;
 	
 	@Type(type = "date")
 
@@ -60,10 +62,7 @@ public class Visita implements Serializable {
 	@Column(name="fecha_insercion")
 	private Date fechaInsercion;
 	
-	//bi-directional many-to-one association to DocumentoApoyo
-	@OneToMany(mappedBy="visita")
-	private List<DocumentoApoyo> documentoApoyos;
-
+	
 
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
@@ -79,6 +78,14 @@ public class Visita implements Serializable {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public int getCuposAprobadosDisponibles() {
+		return cuposAprobadosDisponibles;
+	}
+
+	public void setCuposAprobadosDisponibles(int cuposAprobadosDisponibles) {
+		this.cuposAprobadosDisponibles = cuposAprobadosDisponibles;
 	}
 
 	public String getDescripcion() {
@@ -173,27 +180,7 @@ public class Visita implements Serializable {
 		return asistencia;
 	}
 
-	public List<DocumentoApoyo> getDocumentoApoyos() {
-		return this.documentoApoyos;
-	}
-
-	public void setDocumentoApoyos(List<DocumentoApoyo> documentoApoyos) {
-		this.documentoApoyos = documentoApoyos;
-	}
-
-	public DocumentoApoyo addDocumentoApoyo(DocumentoApoyo documentoApoyo) {
-		getDocumentoApoyos().add(documentoApoyo);
-		documentoApoyo.setVisita(this);
-
-		return documentoApoyo;
-	}
-
-	public DocumentoApoyo removeDocumentoApoyo(DocumentoApoyo documentoApoyo) {
-		getDocumentoApoyos().remove(documentoApoyo);
-		documentoApoyo.setVisita(null);
-
-		return documentoApoyo;
-	}
+	
 
 
 	public Grupo getGrupo() {

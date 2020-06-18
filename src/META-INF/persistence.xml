@@ -11,7 +11,6 @@
 		<class>entidades.Materia</class>
 		<class>entidades.Persona</class>
 		<class>entidades.Profesor</class>
-		<class>entidades.Semestre</class>
 		<class>entidades.TipoDocApoyo</class>
 		<class>entidades.TipoId</class>
 		<class>entidades.TipoUsuario</class>
@@ -19,6 +18,7 @@
 		<class>entidades.Visita</class>
 		<class>entidades.Municipio</class>
 		<class>entidades.Departamento</class>
+		<class>entidades.Semestre</class>
 		<class>entidades.Eps</class>
 		<class>entidades.Prueba</class>
 		<properties>

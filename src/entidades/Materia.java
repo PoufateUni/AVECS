@@ -25,9 +25,8 @@ public class Materia implements Serializable {
 	private List<Grupo> grupos;
 
 	//uni-directional many-to-one association to Semestre
-	@ManyToOne
-	@JoinColumn(name="Semestre_idSemestre")
-	private Semestre semestre;
+	@Column(name="semestre")
+	private int semestre;
 
 	public Materia() {
 	}
@@ -70,11 +69,11 @@ public class Materia implements Serializable {
 		return grupo;
 	}
 
-	public Semestre getSemestre() {
+	public int getSemestre() {
 		return this.semestre;
 	}
 
-	public void setSemestre(Semestre semestre) {
+	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
 

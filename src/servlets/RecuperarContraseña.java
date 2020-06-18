@@ -18,14 +18,14 @@ import utilidades.ServicioEmail;
 /**
  * Servlet implementation class RecuperarContraseña
  */
-@WebServlet("/RecuperarContraseña")
-public class RecuperarContraseña extends HttpServlet {
+@WebServlet("/RecuperarContrase�a")
+public class RecuperarContrase�a extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecuperarContraseña() {
+    public RecuperarContrase�a() {
         super();
         // TODO Auto-generated constructor stub
     }

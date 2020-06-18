@@ -38,13 +38,13 @@ SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     <div class="container">
         <div class="row">
-            <a href="${pageContext.request.contextPath}/Html/RegistrarVisita" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Visita</a>
+            <a href="${pageContext.request.contextPath}/RegistrarVisita" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Visita</a>
             <a href="${pageContext.request.contextPath}/Html/RegistrarEmpresa.jsp" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nueva Empresa</a>
-             <a href="${pageContext.request.contextPath}/Html/RegistrarGrupo" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Grupo</a>
-             <a href="${pageContext.request.contextPath}/Html/RegistrarMateria" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Materia</a>
+             <a href="${pageContext.request.contextPath}/RegistrarGrupo" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Grupo</a>
+             <a href="${pageContext.request.contextPath}/RegistrarMateria" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Registrar Nuevo Materia</a>
               <a href="#" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Listado Estudiantes Inscritos para verificar</a>
-            <button class="btn btn-danger col-xs-6 col-sm-4 col-md-3 col-lg-2" style="margin: 0 10px;">Subir Listado de estudiantes</button>
-              
+            <a href="${pageContext.request.contextPath}/Html/SubirArchivo.jsp" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Subir Documentos</a>
+             <a href="${pageContext.request.contextPath}/ListarEmpresas" class="btn btn-danger col-xs-5 col-sm-3 col-md-2 col-lg-2" style="margin: 0 10px;">Gestionar Documentos</a>
         </div>
     </div>
 
@@ -81,32 +81,11 @@ if(visitas.size()>0){
                      <th><%= visitas.get(i).getCuposDisponibles()%></th>
                      <th><a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
                      <th><a href="EditarVisita?<%=visitas.get(i).getIdVisita()%>">Editar</a></th>
-                     <th><a href="#VF-Confirmacion" class="btn btn-danger " data-toggle="modal">Eliminar Visitas</a></th>
+                    
+                     <th><a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>" onclick="return confirmar()">Eliminar Visita</a></th>
+					
 
                      </tr>
-                     <div class="modal fade" id="VF-Confirmacion">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;&nbsp</button>
-                            <!--MODAL-HEADER-->
-                            <h4 style="text-align: center;">Está seguro de Eliminar esta Visita?</h4>
-
-                            <div class="form-group container input-group" style="width: 50%">
-                                
-                                
-                                <div class="form-group" style="margin: 50px;">
-                                <p>recuerde que al eliminar esta Visita, todos los datos se elimarán junto con la lista de asistencia se perderá </p>
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                    <a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>"class="btn btn-danger">Confirmar</a>
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                </div>
-                            </div>
-                            
-
-                        </div>
-                    </div>
-                </div>
 	
                     <%
                     
@@ -131,10 +110,16 @@ if(visitas.size()>0){
 	
        
        
-       
-    
 
-    
+<script>
+function confirmar()
+{
+	if(confirm('¿Estas seguro de eliminar esta visita?'))
+		return true;
+	else
+		return false;
+}
+</script>
     
  <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

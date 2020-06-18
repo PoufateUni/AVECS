@@ -74,36 +74,11 @@ if(asistencias.size()>0){
                      <th><%= asistencias.get(i).getVisita().getGrupo().getMateria().getNombre() %></th>
                      <th><% if(asistencias.get(i).getAprobado()!=0){ %> <span class=" glyphicon glyphicon-ok"></span>  <% }else{%><span class="glyphicon glyphicon-remove"></span>  <%}%></th>
                      <th><a href="DetallarVisita?<%=asistencias.get(i).getVisita().getIdVisita() %>">Ver más</a></th>
+                  <th><a class="btn btn-danger " href="EliminarInscripcionEstudiante?<%=asistencias.get(i).getIdAsistencia()%>" onclick="return confirmar()">Cancelar Asistencia</a></th>
                   
-                     <th><a href="#VF-Confirmacion" class="btn btn-danger " data-toggle="modal">Cancelar Asistencia</a></th>
 
                      </tr>
-                  <div class="modal fade" id="VF-Confirmacion">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;&nbsp</button>
-                            <!--MODAL-HEADER-->
-                            <h4 style="text-align: center;">Está seguro de Suprimir esta Asistencia?</h4>
-
-                            <div class="form-group container input-group" style="width: 50%">
-                                
-                                
-                                <div class="form-group" style="margin: 50px;">
-                                <p>recuerde que al cancelar su asistencia, otra persona puede registrarse en esta </p><br>
-                                <p> asistencia agotando posiblemente los cupos disponibles o las fechas de inscripción </p><br>
-                                 <p>caducan, no podrá inscribirse de nuevo     </p>
-                                	
-                                    
-                                    <a href="EliminarInscripcionEstudiante?<%=asistencias.get(i).getIdAsistencia()%>"class="btn btn-danger">Confirmar</a>
-                                    
-                                </div>
-                            </div>
-                            
-
-                        </div>
-                    </div>
-                </div>
+           
 	
                     <%
                     
@@ -146,7 +121,15 @@ if(asistencias.size()>0){
     
  <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
+<script>
+function confirmar()
+{
+	if(confirm('¿Estas seguro Cancelar su Asistencia?'))
+		return true;
+	else
+		return false;
+}
+</script>
 </body>
 
 </html>

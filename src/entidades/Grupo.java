@@ -31,7 +31,12 @@ public class Grupo implements Serializable {
 	//bi-directional many-to-one association to Visita
 	@OneToMany(mappedBy="grupo")
 	private List<Visita> visitas;
-
+	@Column(name="anio")
+	private int anio;
+	@Column(name="periodo")
+	private int periodo;
+	
+	
 	public Grupo() {
 	}
 
@@ -39,12 +44,30 @@ public class Grupo implements Serializable {
 		return this.idGrupo;
 	}
 
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+	
+
 	public void setIdGrupo(int idGrupo) {
 		this.idGrupo = idGrupo;
 	}
 
 	public Materia getMateria() {
 		return this.materia;
+	}
+
+	public int getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
 	}
 
 	public void setMateria(Materia materia) {

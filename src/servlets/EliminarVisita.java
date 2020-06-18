@@ -33,6 +33,8 @@ public class EliminarVisita extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		int id=Integer.parseInt(request.getQueryString());
 		request.setAttribute("id",id);
 		doDelete(request,response);

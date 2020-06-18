@@ -76,32 +76,10 @@ if(visitas.size()>0){
                      <th><%= visitas.get(i).getCuposDisponibles()%></th>
                      <th><a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
                      <th><a href="EditarVisita?<%=visitas.get(i).getIdVisita()%>">Editar</a></th>
-                     <th><a href="#VF-Confirmacion" class="btn btn-danger " data-toggle="modal">Eliminar Visitas</a></th>
+                     <th><a class="btn btn-danger " href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>" onclick="return confirmar()">Eliminar Visita</a></th>
 
                      </tr>
-                     <div class="modal fade" id="VF-Confirmacion">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;&nbsp</button>
-                            <!--MODAL-HEADER-->
-                            <h4 style="text-align: center;">Está seguro de Eliminar esta Visita?</h4>
-
-                            <div class="form-group container input-group" style="width: 50%">
-                                
-                                
-                                <div class="form-group" style="margin: 50px;">
-                                <p>recuerde que al eliminar esta Visita, todos los datos se elimarán junto con la lista de asistencia se perderá </p>
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                    <a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>"class="btn btn-danger">Confirmar</a>
-                                    <div class="col-xs-1 col-lg-3"></div>
-                                </div>
-                            </div>
-                            
-
-                        </div>
-                    </div>
-                </div>
+                    
 	
                     <%
                     
@@ -137,7 +115,15 @@ if(visitas.size()>0){
     
  <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
+   <script type="text/javascript">
+   function confirmar()
+   {
+   	if(confirm('¿Estas seguro Cancelar su Asistencia?'))
+   		return true;
+   	else
+   		return false;
+   }
+    </script>
 </body>
 
 </html>

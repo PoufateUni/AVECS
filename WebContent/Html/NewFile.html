@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+	<%@page import="java.util.List"%>
+    <%@page import="entidades.Materia"%>
+    <%@page import="entidades.Grupo"%>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	
+	
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css" /> 
+
+    <title>Registro de nuevos grupos</title>
+</head>
+
+<body>
+<% List<Grupo> grupos = (List)request.getAttribute("listaGrupos");
+List<Materia> materias =(List)request.getAttribute("listaEmpresas");%>
+    <header>
+        <div class="container">
+            <h2>AVECS</h2>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="text-center">Administración de materias y grupos</h2>
+		<table class="table table-striped table-bordered table-hover table-responsive"
+                    style="scroll-behavior: auto;">
+                    <tr>
+                        <th>Codigo grupo</th>
+                        <th>Código materia y nombre</th>                       
+                        <th>Semestre de Materia</th>
+                        <th>Código y nombre de profesor a cargo</th>
+                        <th>Año y periodo de grupo</th>
+                        
+
+                    </tr>
+						<%for(int i=0; i<grupos.size();i++){ %>
+						<tr>
+						<th><%=grupos.get(i).getIdGrupo() %></th>
+						
+						<th><%=grupos.get(i).getMateria().getIdMateria() %>-<%=grupos.get(i).getMateria().getNombre() %></th>
+						<th><%=grupos.get(i).getMateria().getSemestre() %></th>
+						
+							<%if(grupos.get(i).getProfesor()==null){ %>
+							<th><strong>
+								No hay profesor asignado
+							</strong></th>
+							
+							<%}else{%>
+							<th><%=grupos.get(i).getProfesor().getCodigoProfesor() %>-<%=grupos.get(i).getProfesor().getPersona().getNombre() %></th>
+							<%} %>
+							<th><%=grupos.get(i).getAnio() %> Periodo:<%=grupos.get(i).getPeriodo() %></th>
+						</tr>
+		<%} %>
+		
+		
+		 
+
+                </table>
+
+        <form action="${pageContext.request.contextPath}/RegistrarGrupo" method="post">
+            <div id="global">
+               
+            </div>
+            <div><br><br></div>
+            <div class="container form-group  input-group">
+                <div class="row">
+                    <h4 class="col-xs-6 col-lg-2">Materia</h4>
+
+                    
+                    <select name="materia" id="" class="form-control" >
+                        <option value="">Seleccionar materia</option>
+                        <option value="">API</option>
+                        <option value="">Sistemas operativos</option>
+                        <option> <button id="boton1" type="button" class="btn btn-danger btn-md col-xs-4 col-lg-2"
+                        onclick="document.getElementById('oculto1').style.display = 'block'">Nueva materia</button></option>
+                    </select>
+                </div>
+            </div>
+            <div class="container form-group  input-group ">
+                <div class="row">
+                	
+			
+                    <div class="col-xs-1 col-lg-0"></div>
+                    <label class="col-xs-2 col-lg-1">Año</label>
+                    <input class="col-xs-2 col-lg-1" type="number" placeholder="${year}" required>
+                    <div class="col-xs-1 col-lg-2"></div>
+                    <label class="col-xs-2 col-lg-1">Periodo</label>
+                    <select>
+                    	<option value="1">Periodo 1 o A</option>
+                    	<option value="2">Periodo 2 o B</option></select>
+                </div>
+            </div>
+            <div><br><br><br></div>
+
+            <div class="container form-group  input-group">
+                <div class="row">
+                    <h4 class="col-xs-6 col-lg-2">Profesor</h4>
+                    <select name="" id="" class="form-control">
+                        <option value="">Seleccionar profesor</option>
+                        <option value="">Oscar Gallardo</option>
+                        <option value="">Maria del Pilar</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+            <div id="oculto1" class="container form-group  input-group" style="display: none; padding: 5px;">
+                <p>_________________________________________________________</p>
+                <div style="border: solid 3px tomato; padding: 5px;">
+                    <h4>  Datos para crear nueva materia</h4>
+                    <div class="container row">
+                        <label class="col-xs-6 col-lg-2">Código</label>
+                        <input class="col-xs-5 col-lg-2" type="text" placeholder="####">
+                    </div>
+
+                    <div class="container row">
+                        <label class="col-xs-6 col-lg-2">Semestre</label>
+                        <input class="col-xs-5 col-lg-2" type="number" placeholder="Número del 1 al 10">
+                    </div>
+
+                    <div class="container row">
+                        <label class="col-xs-6 col-lg-2">Nombre</label>
+                        <input class="col-xs-5 col-lg-2" type="text" placeholder="Nombre materia">
+                    </div>
+                    <div class="container row">
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-0 col-lg-3"></div>
+            <button id="registrar" type="button" class="btn btn-danger col-xs-5 col-lg-2"
+                onclick="document.getElementById('oculto1').style.display = 'none'">Registrar</button>
+            <div class="col-xs-2 col-lg-1"></div>
+            <button class="btn btn-danger col-xs-5 col-lg-2">Volver</button>
+            <div class="col-xs-0 col-lg-4"></div>
+        </form>
+
+    </div><br>
+
+    <footer style="visibility: hidden;">
+        <div>
+            <p>Programa de Comunicación Social - Universidad Francisco de Paula Santander</p>
+            <p>Teléfono (057)(7) 5776655</p>
+            <p>Correo electrónico: oficinadeprensa@ufps.edu.co - oficinajuridica@ufps.edu.co</p>
+        </div>
+    </footer>
+
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+</body>
+
+</html>

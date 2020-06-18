@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -18,6 +20,10 @@ public class Empresa implements Serializable {
 	private int rut;
 	@Column(name="correo")
 	private String correo;
+	
+	//bi-directional many-to-one association to DocumentoApoyo
+	@OneToMany(mappedBy="empresa")
+	private List<DocumentoApoyo> documentoApoyos;
 	
 	private byte natural_juridica; 
 	
@@ -68,6 +74,31 @@ public class Empresa implements Serializable {
 		this.correo = correo_contacto;
 	}
 
+	
+	public List<DocumentoApoyo> getDocumentoApoyos() {
+		return this.documentoApoyos;
+	}
+
+	public void setDocumentoApoyos(List<DocumentoApoyo> documentoApoyos) {
+		this.documentoApoyos = documentoApoyos;
+	}
+
+
+	public DocumentoApoyo addDocumentoApoyo(DocumentoApoyo documentoApoyo) {
+		getDocumentoApoyos().add(documentoApoyo);
+		documentoApoyo.setEmpresa(this);
+
+		return documentoApoyo;
+	}
+
+	public DocumentoApoyo removeDocumentoApoyo(DocumentoApoyo documentoApoyo) {
+		getDocumentoApoyos().remove(documentoApoyo);
+		documentoApoyo.setEmpresa(null);
+
+		return documentoApoyo;
+	}
+	
+	
 	public String getNombreRazonSocial() {
 		return this.nombreRazonSocial;
 	}
