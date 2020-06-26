@@ -23,9 +23,10 @@ public class Asistencia implements Serializable {
 
 
 
-	@Temporal(TemporalType.TIMESTAMP)
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_registro")
+
 	private Date fechaRegistro;
 
 	//bi-directional many-to-one association to Estudiante

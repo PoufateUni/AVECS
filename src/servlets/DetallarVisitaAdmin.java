@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,14 +21,14 @@ import modelo.VisitaDao;
 /**
  * Servlet implementation class DetallarVisita
  */
-@WebServlet("/DetallarVisita")
-public class DetallarVisita extends HttpServlet {
+@WebServlet("/DetallarVisitaAdmin")
+public class DetallarVisitaAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetallarVisita() {
+    public DetallarVisitaAdmin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,6 +40,9 @@ public class DetallarVisita extends HttpServlet {
 	    
 	    VisitaDao vd= new VisitaDao();
 	    Visita v= vd.find(Integer.parseInt(request.getQueryString()));
+	    
+	    List estudiantesinscritosactuales=v.getAsistencias();
+	    
 		request.setAttribute("grupo", v.getGrupo().getIdGrupo());
 		request.setAttribute("materia", v.getGrupo().getMateria().getNombre());
 		request.setAttribute("docente",v.getGrupo().getProfesor().getPersona().getNombre() );
@@ -54,14 +58,15 @@ public class DetallarVisita extends HttpServlet {
 		request.setAttribute("titulo", v.getTitulo());
 		request.setAttribute("descripcion", v.getDescripcion());
 		request.setAttribute("idVisita",v.getIdVisita());
-		
+		request.setAttribute("cuposAutorizar", v.getCuposAprobadosDisponibles());
+		request.setAttribute("estudiantesinscritosactuales",estudiantesinscritosactuales );
 		Date fechaIn  = v.getFechaVisitaInicio();
 		Date fechaFin  = v.getFechaVisitaSalida();
 		Long diasI=fechaIn.getTime();
 		Long diasF=fechaFin.getTime();
 		
 		request.setAttribute("duracion", ((diasF-diasI)/(86400000)));
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Html/VisitaDetalle.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Html/VisitaDetalleAdministrador.jsp");
 		rd.forward(request, response);
 		
 		

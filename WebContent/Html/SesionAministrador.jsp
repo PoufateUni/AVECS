@@ -79,7 +79,7 @@ if(visitas.size()>0){
                      <th><%= visitas.get(i).getGrupo().getIdGrupo() %></th>
                      <th><%= visitas.get(i).getGrupo().getMateria().getNombre() %></th>
                      <th><%= visitas.get(i).getCuposDisponibles()%></th>
-                     <th><a href="DetallarVisita?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
+                     <th><a href="DetallarVisitaAdmin?<%=visitas.get(i).getIdVisita() %>">Ver más</a></th>
                      <th><a href="EditarVisita?<%=visitas.get(i).getIdVisita()%>">Editar</a></th>
                     
                      <th><a href="EliminarVisita?<%=visitas.get(i).getIdVisita()%>" onclick="return confirmar()">Eliminar Visita</a></th>

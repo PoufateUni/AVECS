@@ -25,7 +25,7 @@ SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     VisitaDao vd = new VisitaDao();
    	
     
-    List <Visita> visitas= vd.getEm().createQuery("from Visita order by fechaInsercion  DESC ").getResultList();
+    List <Visita> visitas= vd.getEm().createQuery("from Visita order by fechaInsercion  DESC ").setMaxResults(10).getResultList();
     
     %>
     <header style="background: #dd4b39">
